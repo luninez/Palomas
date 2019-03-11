@@ -5,10 +5,9 @@
 
   <string name="login_error">Contraseña o email incorrecto</string>
 
-  <string name="register_contraseña_incorrecta">Las contraseñas no cuenciden</string>
   <string name="register_contraseña_no_segura">La contraseña tiene que tener un mínimo de 6 caracteres</string>
   <string name="register_mismo_correo">Ese correo ya esta en uso</string>
-  <string name="register_error_registrar">Error al registrar</string>
+  <string name="register_error">Error al registrar</string>
 
   <string name="error">Error</string>
   <string name="edit">Editar</string>
@@ -28,8 +27,9 @@
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_dashborad">Dashborad</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_search">Buscar</string>
+    <string name="title_categorie">Categorias</string>
+    <string name="title_carrito">Carrito</string>
+    <string name="title_perfil">Perfil</string>
 </resources>
