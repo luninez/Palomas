@@ -3,6 +3,7 @@ import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
 import { create, index, show, update, destroy } from './controller'
 import { schema } from './model'
+import { master } from '../../services/passport';
 export Categoria, { schema } from './model'
 
 const router = new Router()
@@ -12,12 +13,17 @@ const { nombre } = schema.tree
  * @api {post} /categorias Create categoria
  * @apiName CreateCategoria
  * @apiGroup Categoria
- * @apiParam nombre Categoria's nombre.
+ * @apiPermission master
+ * @apiParam {String} access_token Master access_token.
+ * @apiParam {String} nombre Categoria's nombre.
  * @apiSuccess {Object} categoria Categoria's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Categoria not found.
+ * @apiError 404 Categoria not found. 
+ * @apiError 401 Master access only.
+ * @apiError 409 Email already registered.
  */
 router.post('/',
+  token({required: true, roles: ['admin']}),
   body({ nombre }),
   create)
 
@@ -29,8 +35,11 @@ router.post('/',
  * @apiSuccess {Number} count Total amount of categorias.
  * @apiSuccess {Object[]} rows List of categorias.
  * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiPermission master
+ * @apiParam {String} access_token Master access_token.
  */
 router.get('/',
+  master(),
   query(),
   index)
 
@@ -43,6 +52,7 @@ router.get('/',
  * @apiError 404 Categoria not found.
  */
 router.get('/:id',
+  master(),
   show)
 
 /**
@@ -55,6 +65,7 @@ router.get('/:id',
  * @apiError 404 Categoria not found.
  */
 router.put('/:id',
+  token({required: true, roles: ['admin']}),
   body({ nombre }),
   update)
 
@@ -66,6 +77,7 @@ router.put('/:id',
  * @apiError 404 Categoria not found.
  */
 router.delete('/:id',
+  token({required: true, roles: ['admin']}),
   destroy)
 
 export default router

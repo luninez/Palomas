@@ -3,6 +3,7 @@ import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
 import { create, index, show, update, destroy } from './controller'
 import { schema } from './model'
+import { master } from '../../services/passport';
 export Pedido, { schema } from './model'
 
 const router = new Router()
@@ -21,6 +22,7 @@ const { estado, fecha, productoId, usuarioId } = schema.tree
  * @apiError 404 Pedido not found.
  */
 router.post('/',
+  token({required: true}),
   body({ estado, fecha, productoId, usuarioId }),
   create)
 
@@ -34,6 +36,7 @@ router.post('/',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
 router.get('/',
+  token({required: true}),
   query(),
   index)
 
@@ -46,6 +49,7 @@ router.get('/',
  * @apiError 404 Pedido not found.
  */
 router.get('/:id',
+  token({required: true}),
   show)
 
 /**
@@ -61,6 +65,7 @@ router.get('/:id',
  * @apiError 404 Pedido not found.
  */
 router.put('/:id',
+  token({required: true}),
   body({ estado, fecha, productoId, usuarioId }),
   update)
 
@@ -72,6 +77,7 @@ router.put('/:id',
  * @apiError 404 Pedido not found.
  */
 router.delete('/:id',
+  token({required: true}),
   destroy)
 
 export default router

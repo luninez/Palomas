@@ -20,6 +20,7 @@ const { cantidad, precio, pedidoId } = schema.tree
  * @apiError 404 Linea pedido not found.
  */
 router.post('/',
+  token({required: true}),
   body({ cantidad, precio, pedidoId }),
   create)
 
@@ -33,6 +34,7 @@ router.post('/',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
 router.get('/',
+  token({required: true}),
   query(),
   index)
 
@@ -45,6 +47,7 @@ router.get('/',
  * @apiError 404 Linea pedido not found.
  */
 router.get('/:id',
+  token({required: true}),
   show)
 
 /**
@@ -59,6 +62,7 @@ router.get('/:id',
  * @apiError 404 Linea pedido not found.
  */
 router.put('/:id',
+  token({required: true}),
   body({ cantidad, precio, pedidoId }),
   update)
 
@@ -70,6 +74,7 @@ router.put('/:id',
  * @apiError 404 Linea pedido not found.
  */
 router.delete('/:id',
+  token({required: true}),
   destroy)
 
 export default router

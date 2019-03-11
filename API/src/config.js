@@ -39,7 +39,7 @@ const config = {
   test: { },
   development: {
     mongo: {
-      uri: 'mongodb://localhost/palomas-app-dev',
+      uri: 'mongodb://lucia:lucia123@ds255924.mlab.com:55924/palomas',
       options: {
         debug: true
       }
@@ -49,7 +49,7 @@ const config = {
     ip: process.env.IP || undefined,
     port: process.env.PORT || 8080,
     mongo: {
-      uri: process.env.MONGODB_URI || 'mongodb://localhost/palomas-app'
+      uri: process.env.MONGODB_URI || 'mongodb://lucia:lucia123@ds255924.mlab.com:55924/palomas'
     }
   }
 }

@@ -2,9 +2,7 @@ import { Router } from 'express'
 import user from './user'
 import auth from './auth'
 import producto from './producto'
-import producto from './producto'
 import categoria from './categoria'
-import usuario from './usuario'
 import pedido from './pedido'
 import lineaPedido from './linea_pedido'
 
@@ -36,9 +34,7 @@ const router = new Router()
 router.use('/users', user)
 router.use('/auth', auth)
 router.use('/productos', producto)
-router.use('/productos', producto)
 router.use('/categorias', categoria)
-router.use('/usuarios', usuario)
 router.use('/pedidos', pedido)
 router.use('/linea_pedidos', lineaPedido)
 
