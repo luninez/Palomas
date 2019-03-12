@@ -13,18 +13,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.st.pillboxapp.R;
-import com.st.pillboxapp.responses.AuthAndRegisterResponse;
-import com.st.pillboxapp.retrofit.generator.ServiceGenerator;
-import com.st.pillboxapp.retrofit.services.AuthAndRegisterService;
-import com.st.pillboxapp.util.Util;
+import com.example.palomasapp.Funcionalidades.Responde.AuthAndRegisterResponse;
+import com.example.palomasapp.Funcionalidades.ServiceGenerator;
+import com.example.palomasapp.Funcionalidades.Services.AuthAndRegisterService;
+import com.example.palomasapp.Funcionalidades.Util;
+import com.example.palomasapp.R;
 
 import okhttp3.Credentials;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-;
 
 public class LoginActivity extends AppCompatActivity {
 

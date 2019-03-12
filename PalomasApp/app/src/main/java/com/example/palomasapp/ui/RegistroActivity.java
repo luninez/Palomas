@@ -26,7 +26,7 @@ import retrofit2.Response;
 
 public class RegistroActivity extends AppCompatActivity {
 
-    private EditText nombre, correo, clave, comprobacionClave;
+    private EditText nombre, correo, clave;
     private Button btnRegistro;
 
     @Override
@@ -39,7 +39,6 @@ public class RegistroActivity extends AppCompatActivity {
         nombre = findViewById(R.id.editNombreRegistro);
         correo = findViewById(R.id.editEmailRegistro);
         clave = findViewById(R.id.passwordRegsitro);
-        comprobacionClave = findViewById(R.id.comprobacionPasswordRegistro);
         btnRegistro = findViewById(R.id.btnRegistro);
 
         doRegister();
@@ -96,15 +95,11 @@ public class RegistroActivity extends AppCompatActivity {
                 String name = nombre.getText().toString().trim();
                 String email = correo.getText().toString().trim();
                 String password = clave.getText().toString().trim();
-                String compassword = comprobacionClave.getText().toString().trim();
 
                 if(password.length() < 6){
                     onRegisterFail(R.string.register_contraseña_no_segura);
                 }
 
-                if(!password.equals(compassword)){
-                    onRegisterFail(R.string.register_contraseña_incorrecta);
-                }
             }
         });
     }
