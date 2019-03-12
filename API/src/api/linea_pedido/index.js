@@ -3,6 +3,7 @@ import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
 import { create, index, show, update, destroy } from './controller'
 import { schema } from './model'
+import { token } from '../../services/passport'
 export LineaPedido, { schema } from './model'
 
 const router = new Router()
