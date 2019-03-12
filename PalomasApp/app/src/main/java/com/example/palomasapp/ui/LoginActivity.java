@@ -41,8 +41,15 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.emailLogin);
         password = findViewById(R.id.passwordLogin);
 
-        btnLogin = findViewById(R.id.btnGuardar);
-        btnRegistro = findViewById(R.id.btnRegistro);
+        btnLogin = findViewById(R.id.btnLogin);
+        btnRegistro = findViewById(R.id.btnLoginRegistro);
+
+        btnRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegistroActivity.class));
+            }
+        });
 
         doLogin();
     }

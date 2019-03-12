@@ -7,7 +7,7 @@ import { token } from '../../services/passport'
 export LineaPedido, { schema } from './model'
 
 const router = new Router()
-const { cantidad, precio, pedidoId } = schema.tree
+const { cantidad, precio, pedidoId, productoId } = schema.tree
 
 /**
  * @api {post} /linea_pedidos Create linea pedido
@@ -22,7 +22,7 @@ const { cantidad, precio, pedidoId } = schema.tree
  */
 router.post('/',
   token({required: true}),
-  body({ cantidad, precio, pedidoId }),
+  body({ cantidad, precio, pedidoId, productoId }),
   create)
 
 /**
@@ -64,7 +64,7 @@ router.get('/:id',
  */
 router.put('/:id',
   token({required: true}),
-  body({ cantidad, precio, pedidoId }),
+  body({ cantidad, precio, pedidoId, productoId }),
   update)
 
 /**

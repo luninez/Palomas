@@ -7,14 +7,14 @@ const lineaPedidoSchema = new Schema({
   precio: {
     type: Number
   },
-  pedidoId: [{
+  pedidoId: {
     type: Schema.Types.ObjectId,
     ref: 'pedido'
-  }],
-  productoId: [{
+  },
+  productoId: {
     type: Schema.Types.ObjectId,
     ref: 'producto'
-  }]
+  }
 }, {
   timestamps: true,
   toJSON: {

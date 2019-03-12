@@ -9,6 +9,8 @@ export const create = ({ bodymen: { body } }, res, next) =>
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   Producto.find(query, select, cursor)
+    .populate('categoriaId')
+    .exec()
     .then((productos) => productos.map((producto) => producto.view()))
     .then(success(res))
     .catch(next)

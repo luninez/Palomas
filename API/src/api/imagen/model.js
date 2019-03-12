@@ -1,21 +1,15 @@
 import mongoose, { Schema } from 'mongoose'
 
-const productoSchema = new Schema({
-  nombre: {
+const imagenSchema = new Schema({
+  url: {
     type: String
   },
-  precio: {
-    type: Number
-  },
-  descripcion: {
-    type: String
-  },
-  categoriaId: {
+  productoId: {
     type: Schema.Types.ObjectId,
-    ref: 'Categoria'
+    ref: 'producto'
   },
-  favorito: {
-    type: Boolean
+  deleteHash: {
+    type: String
   }
 }, {
   timestamps: true,
@@ -25,17 +19,14 @@ const productoSchema = new Schema({
   }
 })
 
-productoSchema.methods = {
+imagenSchema.methods = {
   view (full) {
     const view = {
       // simple view
       id: this.id,
-      nombre: this.nombre,
-      precio: this.precio,
-      descripcion: this.descripcion,
-      categoriaId: this.categoriaId,
-      imagenes: this.imagenes,
-      favorito: this.favorito,
+      url: this.url,
+      productoId: this.productoId,
+      deleteHash: this.deleteHash,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }
@@ -47,7 +38,7 @@ productoSchema.methods = {
   }
 }
 
-const model = mongoose.model('Producto', productoSchema)
+const model = mongoose.model('Imagen', imagenSchema)
 
 export const schema = model.schema
 export default model

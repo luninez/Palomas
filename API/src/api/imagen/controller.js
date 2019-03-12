@@ -1,43 +1,43 @@
 import { success, notFound } from '../../services/response/'
-import { Pedido } from '.'
+import { Imagen } from '.'
 
 export const create = ({ bodymen: { body } }, res, next) =>
-  Pedido.create(body)
-    .then((pedido) => pedido.view(true))
+  Imagen.create(body)
+    .then((imagen) => imagen.view(true))
     .then(success(res, 201))
     .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
-  Pedido.count(query)
-    .populate('usuarioId')
+  Imagen.count(query)
+    .populate('productoId')
     .exec()
-    .then(count => Pedido.find(query, select, cursor)
-      .then((pedidos) => ({
+    .then(count => Imagen.find(query, select, cursor)
+      .then((imagens) => ({
         count,
-        rows: pedidos.map((pedido) => pedido.view())
+        rows: imagens.map((imagen) => imagen.view())
       }))
     )
     .then(success(res))
     .catch(next)
 
 export const show = ({ params }, res, next) =>
-  Pedido.findById(params.id)
+  Imagen.findById(params.id)
     .then(notFound(res))
-    .then((pedido) => pedido ? pedido.view() : null)
+    .then((imagen) => imagen ? imagen.view() : null)
     .then(success(res))
     .catch(next)
 
 export const update = ({ bodymen: { body }, params }, res, next) =>
-  Pedido.findById(params.id)
+  Imagen.findById(params.id)
     .then(notFound(res))
-    .then((pedido) => pedido ? Object.assign(pedido, body).save() : null)
-    .then((pedido) => pedido ? pedido.view(true) : null)
+    .then((imagen) => imagen ? Object.assign(imagen, body).save() : null)
+    .then((imagen) => imagen ? imagen.view(true) : null)
     .then(success(res))
     .catch(next)
 
 export const destroy = ({ params }, res, next) =>
-  Pedido.findById(params.id)
+  Imagen.findById(params.id)
     .then(notFound(res))
-    .then((pedido) => pedido ? pedido.remove() : null)
+    .then((imagen) => imagen ? imagen.remove() : null)
     .then(success(res, 204))
     .catch(next)

@@ -34,21 +34,17 @@ public class RegistroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
+        getSupportActionBar().hide();
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         nombre = findViewById(R.id.editNombreRegistro);
         correo = findViewById(R.id.editEmailRegistro);
         clave = findViewById(R.id.passwordRegsitro);
+
         btnRegistro = findViewById(R.id.btnRegistro);
 
         doRegister();
-
-        btnRegistro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(RegistroActivity.this, RegistroActivity.class));
-            }
-        });
 
     }
 
@@ -62,7 +58,6 @@ public class RegistroActivity extends AppCompatActivity {
 
     }
 
-    //alerta de error en caso de fallo
     public void onRegisterFail(int tipoError) {
         AlertDialog.Builder builder = new AlertDialog.Builder(RegistroActivity.this);
 
@@ -96,9 +91,12 @@ public class RegistroActivity extends AppCompatActivity {
                 String email = correo.getText().toString().trim();
                 String password = clave.getText().toString().trim();
 
-                if(password.length() < 6){
-                    onRegisterFail(R.string.register_contraseña_no_segura);
-                }
+                Register usuario = new Register(name, email, password);
+                crearUsuarioNuevo(usuario, progressDialog);
+
+//                if(password.length() < 6){
+//                    onRegisterFail(R.string.register_contraseña_no_segura);
+//                }
 
             }
         });

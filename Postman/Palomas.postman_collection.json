@@ -1,0 +1,639 @@
+{
+	"info": {
+		"_postman_id": "6ac2c296-f450-43c6-b30f-ef515394043b",
+		"name": "Palomas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/users?access_token={{access_token}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"eva@eva.com\",\n\t\"password\": \"eva123\",\n\t\"name\": \"eva\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}categoria?access_token={{MASTER_KEY}}",
+							"host": [
+								"{{base_url}}categoria"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{MASTER_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"lucia@lucia.com\",\n\t\"password\": \"lucia123\",\n\t\"name\": \"lucia\",\n\t\"role\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}users?access_token={{MASTER_KEY}}",
+							"host": [
+								"{{base_url}}users"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{MASTER_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login-Eva",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "lucia@lucia.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "lucia123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/auth?access_token={{MASTER_KEY}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{MASTER_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/users/me?access_token={{access_token}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login-lucia",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "lucia123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "lucia@lucia.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/auth?access_token={{MASTER_KEY}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{MASTER_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "producto",
+			"item": [
+				{
+					"name": "all productos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/productos?access_token={{MASTER_KEY}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"productos"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{MASTER_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add producto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre\": \"Triangulo de chocolate\",\n\t\"price\": 1.50,\n\t\"description\": \"masa de hojaldre relleno de chocolate con leche y cubierto con chocolate negro\",\n\t\"categoriaId\": \"5c87a818fc485a46a694280a\",\n\t\"favorito\": \"false\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/productos?access_token={{access_token}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"productos"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add producto favs",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre\": \"Triangulo de chocolate\",\n\t\"price\": 1.50,\n\t\"description\": \"masa de hojaldre relleno de chocolate con leche y cubierto con chocolate negro\",\n\t\"categoriaId\": \"5c87a818fc485a46a694280a\",\n\t\"favorito\": \"true\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/productos?access_token={{access_token}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"productos"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete producto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/productos/5c87a842453d3b0017249b63?access_token={{access_token}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"productos",
+								"5c87a842453d3b0017249b63"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pedido",
+			"item": [
+				{
+					"name": "all pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/pedidos?access_token={{access_token_eva}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pedidos"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token_eva}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add pedido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"estado\": \"en proceso\",\n\t\"fecha\": \"11/03/2019\",\n\t\"usuarioId\": \"5c86ce1b157fef0017bc92f8\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/pedidos?access_token={{access_token}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pedidos"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete pedido",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/productos/5c87a842453d3b0017249b63?access_token={{access_token}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"productos",
+								"5c87a842453d3b0017249b63"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categoria",
+			"item": [
+				{
+					"name": "add categoria",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre\": \"Bolleria\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/categorias?access_token={{access_token}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categorias"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all categoria",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}categorias?access_token={{MASTER_KEY}}",
+							"host": [
+								"{{base_url}}categorias"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{MASTER_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "linea pedido",
+			"item": [
+				{
+					"name": "add linea pedido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cantidad\": 1,\n\t\"precio\": 1.50,\n\t\"pedidoId\": \"5c87825dd2769b0017a89f59\",\n\t\"productoId\":\"5c878242d2769b0017a89f58\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/linea_pedidos?access_token={{access_token_eva}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"linea_pedidos"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token_eva}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all linea pedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/linea_pedidos?access_token={{access_token_eva}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"linea_pedidos"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token_eva}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Imagen",
+			"item": [
+				{
+					"name": "all imagenes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/imagenes?access_token={{access_token}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"imagenes"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add imagen",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "productoId",
+									"value": "5c8798d5f6354c00176cfa5e",
+									"type": "text"
+								},
+								{
+									"key": "imagen",
+									"type": "file",
+									"src": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/imagenes?access_token={{access_token}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"imagenes"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

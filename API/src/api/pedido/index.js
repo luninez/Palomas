@@ -7,7 +7,7 @@ import { token } from '../../services/passport'
 export Pedido, { schema } from './model'
 
 const router = new Router()
-const { estado, fecha, productoId, usuarioId } = schema.tree
+const { estado, fecha, usuarioId } = schema.tree
 
 /**
  * @api {post} /pedidos Create pedido
@@ -23,7 +23,7 @@ const { estado, fecha, productoId, usuarioId } = schema.tree
  */
 router.post('/',
   token({required: true}),
-  body({ estado, fecha, productoId, usuarioId }),
+  body({ estado, fecha, usuarioId }),
   create)
 
 /**
@@ -66,7 +66,7 @@ router.get('/:id',
  */
 router.put('/:id',
   token({required: true}),
-  body({ estado, fecha, productoId, usuarioId }),
+  body({ estado, fecha, usuarioId }),
   update)
 
 /**

@@ -7,10 +7,10 @@ const pedidoSchema = new Schema({
   fecha: {
     type: String
   },
-  usuarioId: [{
+  usuarioId: {
     type: Schema.Types.ObjectId,
     ref: 'user'
-  }]
+  }
 }, {
   timestamps: true,
   toJSON: {
