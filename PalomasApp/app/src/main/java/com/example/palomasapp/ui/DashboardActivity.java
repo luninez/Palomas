@@ -3,36 +3,83 @@ package com.example.palomasapp.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
+import com.example.palomasapp.Funcionalidades.Response.ProductoResponse;
+import com.example.palomasapp.Interfaz.OnListProductoInteractionListener;
+import com.example.palomasapp.List.fragment_list.BuscarpastelesFragment;
+import com.example.palomasapp.List.fragment_list.CarritoFragment;
+import com.example.palomasapp.List.fragment_list.CategoriasFragment;
+import com.example.palomasapp.List.fragment_list.PastelesFragment;
+import com.example.palomasapp.Models.Producto;
+import com.example.palomasapp.Perfil;
 import com.example.palomasapp.R;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements OnListProductoInteractionListener {
 
     private TextView mTextMessage;
+    private Fragment f;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            BottomNavigationView n = findViewById(R.id.navigation);
+
+            Menu menu = n.getMenu();
+            menu.findItem(R.id.navigation_home).setIcon(R.drawable.ic_home_black_24dp);
+            menu.findItem(R.id.navigation_search).setIcon(R.drawable.ic_search_black_24dp);
+            menu.findItem(R.id.navigation_category).setIcon(R.drawable.ic_capcake_black_24dp);
+            menu.findItem(R.id.navigation_carrito).setIcon(R.drawable.ic_carrito_black_24dp);
+            menu.findItem(R.id.navigation_perfil).setIcon(R.drawable.ic_perfil_black_24dp);
+
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    item.setIcon(R.drawable.ic_home_black_24dp);
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.containerFragmentMain, new PastelesFragment(), "home")
+                            .commit();
+
                     return true;
                 case R.id.navigation_search:
-                    mTextMessage.setText(R.string.title_search);
+                    item.setIcon(R.drawable.ic_search_black_24dp);
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.containerFragmentMain, new BuscarpastelesFragment(), "search")
+                            .commit();
+
                     return true;
                 case R.id.navigation_category:
-                    mTextMessage.setText(R.string.title_categorie);
+                    item.setIcon(R.drawable.ic_capcake_black_24dp);
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.containerFragmentMain, new CategoriasFragment(), "categorias")
+                            .commit();
+
                     return true;
                 case R.id.navigation_carrito:
-                    mTextMessage.setText(R.string.title_carrito);
+                    item.setIcon(R.drawable.ic_carrito_black_24dp);
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.containerFragmentMain, new CarritoFragment(), "carrito")
+                            .commit();
+
                     return true;
                 case R.id.navigation_perfil:
-                    mTextMessage.setText(R.string.title_perfil);
+                    item.setIcon(R.drawable.ic_perfil_black_24dp);
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.containerFragmentMain, new Perfil(), "perfil")
+                            .commit();
+
                     return true;
             }
             return false;
@@ -47,6 +94,31 @@ public class DashboardActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        getSupportFragmentManager().beginTransaction().add(R.id.containerFragmentMain, new PastelesFragment(), "home").commit();
     }
 
+    @Override
+    public void onDeleteProductoClick(String id, String nombre) {
+
+    }
+
+    @Override
+    public void onEditProductoClick(Producto p) {
+
+    }
+
+    @Override
+    public void onAddProductoClick(Producto p) {
+
+    }
+
+    @Override
+    public void onInfoClickProducto(Producto p) {
+
+    }
+
+    @Override
+    public void onFavoriteClickProducto(ProductoResponse p) {
+
+    }
 }

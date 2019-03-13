@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.palomasapp.Funcionalidades.Responde.AuthAndRegisterResponse;
+import com.example.palomasapp.Funcionalidades.Response.AuthAndRegisterResponse;
 import com.example.palomasapp.Funcionalidades.ServiceGenerator;
 import com.example.palomasapp.Funcionalidades.Services.AuthAndRegisterService;
 import com.example.palomasapp.Funcionalidades.Util;

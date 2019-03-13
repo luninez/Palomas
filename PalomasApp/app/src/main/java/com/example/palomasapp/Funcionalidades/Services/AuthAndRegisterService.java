@@ -1,8 +1,8 @@
 package com.example.palomasapp.Funcionalidades.Services;
 
 
-import com.example.palomasapp.Funcionalidades.Responde.AuthAndRegisterResponse;
-import com.example.palomasapp.Models.Register;
+import com.example.palomasapp.Funcionalidades.Response.AuthAndRegisterResponse;
+import com.example.palomasapp.Models.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -15,5 +15,5 @@ public interface AuthAndRegisterService {
     Call<AuthAndRegisterResponse> login(@Header("Authorization") String authorization);
 
     @POST("/users")
-    Call<AuthAndRegisterResponse> register(@Body Register registro);
+    Call<AuthAndRegisterResponse> register(@Body User User);
 }

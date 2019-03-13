@@ -6,13 +6,27 @@ public class User {
 
     private String id;
     private String name;
-    private String picture;
     private String email;
+    private String password;
+    private String picture;
+    private String role;
 
-    public User() {
+    public User() { }
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
-    public User(String id, String name, String picture, String email) {
+    public User(String id, String name, String email, String picture) {
+        this.id = id;
+        this.name = name;
+        this.picture = picture;
+        this.email = email;
+    }
+
+    public User(String id, String name, String email, String password, String picture, String role) {
         this.id = id;
         this.name = name;
         this.picture = picture;
@@ -51,14 +65,20 @@ public class User {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", picture='" + picture + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
@@ -68,12 +88,26 @@ public class User {
         User user = (User) o;
         return Objects.equals(id, user.id) &&
                 Objects.equals(name, user.name) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
                 Objects.equals(picture, user.picture) &&
-                Objects.equals(email, user.email);
+                Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, picture, email);
+        return Objects.hash(id, name, email, password, picture, role);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", picture='" + picture + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

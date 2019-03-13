@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/producto_item_image"
         app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <EditText
@@ -61,11 +61,11 @@
 
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/producto_item_image"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/editNombreRegistro"

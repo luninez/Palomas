@@ -1,4 +1,4 @@
-package com.example.palomasapp.Funcionalidades.Responde;
+package com.example.palomasapp.Funcionalidades.Response;
 
 import com.example.palomasapp.Models.User;
 
@@ -7,8 +7,7 @@ public class AuthAndRegisterResponse {
     private String token;
     private User user;
 
-    public AuthAndRegisterResponse() {
-    }
+    public AuthAndRegisterResponse() { }
 
     public AuthAndRegisterResponse(String token, User user) {
         this.token = token;

@@ -13,11 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.palomasapp.Funcionalidades.Responde.AuthAndRegisterResponse;
+import com.example.palomasapp.Funcionalidades.Response.AuthAndRegisterResponse;
 import com.example.palomasapp.Funcionalidades.ServiceGenerator;
 import com.example.palomasapp.Funcionalidades.Services.AuthAndRegisterService;
 import com.example.palomasapp.Funcionalidades.Util;
-import com.example.palomasapp.Models.Register;
+import com.example.palomasapp.Models.User;
 import com.example.palomasapp.R;
 
 import retrofit2.Call;
@@ -91,7 +91,7 @@ public class RegistroActivity extends AppCompatActivity {
                 String email = correo.getText().toString().trim();
                 String password = clave.getText().toString().trim();
 
-                Register usuario = new Register(name, email, password);
+                User usuario = new User(name, email, password);
                 crearUsuarioNuevo(usuario, progressDialog);
 
 //                if(password.length() < 6){
@@ -102,10 +102,10 @@ public class RegistroActivity extends AppCompatActivity {
         });
     }
 
-    public void crearUsuarioNuevo(Register registro, final ProgressDialog progressDialog){
+    public void crearUsuarioNuevo(User user, final ProgressDialog progressDialog){
         AuthAndRegisterService service = ServiceGenerator.createService(AuthAndRegisterService.class);
 
-        Call<AuthAndRegisterResponse> registerResponseCall = service.register(registro);
+        Call<AuthAndRegisterResponse> registerResponseCall = service.register(user);
 
         registerResponseCall.enqueue(new Callback<AuthAndRegisterResponse>() {
 
