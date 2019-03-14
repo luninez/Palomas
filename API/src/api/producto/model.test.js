@@ -3,7 +3,7 @@ import { Producto } from '.'
 let producto
 
 beforeEach(async () => {
-  producto = await Producto.create({ nombre: 'test', precio: 'test', descripcion: 'test', categoriaId: 'test', imagenes: 'test', favorito: 'test' })
+  producto = await Producto.create({ nombre: 'test', descripcion: 'test', precio: 'test', favorito: 'test', categoriaId: 'test' })
 })
 
 describe('view', () => {
@@ -12,11 +12,10 @@ describe('view', () => {
     expect(typeof view).toBe('object')
     expect(view.id).toBe(producto.id)
     expect(view.nombre).toBe(producto.nombre)
-    expect(view.precio).toBe(producto.precio)
     expect(view.descripcion).toBe(producto.descripcion)
-    expect(view.categoriaId).toBe(producto.categoriaId)
-    expect(view.imagenes).toBe(producto.imagenes)
+    expect(view.precio).toBe(producto.precio)
     expect(view.favorito).toBe(producto.favorito)
+    expect(view.categoriaId).toBe(producto.categoriaId)
     expect(view.createdAt).toBeTruthy()
     expect(view.updatedAt).toBeTruthy()
   })
@@ -26,11 +25,10 @@ describe('view', () => {
     expect(typeof view).toBe('object')
     expect(view.id).toBe(producto.id)
     expect(view.nombre).toBe(producto.nombre)
-    expect(view.precio).toBe(producto.precio)
     expect(view.descripcion).toBe(producto.descripcion)
-    expect(view.categoriaId).toBe(producto.categoriaId)
-    expect(view.imagenes).toBe(producto.imagenes)
+    expect(view.precio).toBe(producto.precio)
     expect(view.favorito).toBe(producto.favorito)
+    expect(view.categoriaId).toBe(producto.categoriaId)
     expect(view.createdAt).toBeTruthy()
     expect(view.updatedAt).toBeTruthy()
   })

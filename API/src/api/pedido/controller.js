@@ -9,9 +9,8 @@ export const create = ({ bodymen: { body } }, res, next) =>
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   Pedido.count(query)
-    .populate('usuarioId')
-    .exec()
     .then(count => Pedido.find(query, select, cursor)
+      .populate('usuarioId', 'name')
       .then((pedidos) => ({
         count,
         rows: pedidos.map((pedido) => pedido.view())

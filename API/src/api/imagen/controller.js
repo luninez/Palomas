@@ -1,16 +1,21 @@
 import { success, notFound } from '../../services/response/'
 import { Imagen } from '.'
 
-export const create = ({ bodymen: { body } }, res, next) =>
-  Imagen.create(body)
+const uploadService = require('../../services/upload/')
+
+export const create = (req, res, next) =>
+  uploadService.uploadFromBinary(req.file.buffer)
+    .then(json => Imagen.create({
+      productoId: req.body.productoId,
+      url: json.data.link,
+      deleteHash: json.data.deletehash
+    }))
     .then((imagen) => imagen.view(true))
     .then(success(res, 201))
     .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   Imagen.count(query)
-    .populate('productoId')
-    .exec()
     .then(count => Imagen.find(query, select, cursor)
       .then((imagens) => ({
         count,

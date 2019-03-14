@@ -39,5 +39,6 @@ router.use('/categorias', categoria)
 router.use('/pedidos', pedido)
 router.use('/linea_pedidos', lineaPedido)
 router.use('/imagenes', imagen)
+router.use('/productos', producto)
 
 export default router

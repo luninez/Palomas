@@ -1,12 +1,14 @@
 import mongoose, { Schema } from 'mongoose'
 
+const uploadService = require('../../services/upload')
+
 const imagenSchema = new Schema({
-  url: {
-    type: String
-  },
   productoId: {
     type: Schema.Types.ObjectId,
-    ref: 'producto'
+    ref: 'Producto'
+  },
+  url: {
+    type: String
   },
   deleteHash: {
     type: String
@@ -17,6 +19,12 @@ const imagenSchema = new Schema({
     virtuals: true,
     transform: (obj, ret) => { delete ret._id }
   }
+})
+
+imagenSchema.pre('remove', {query: true}, function (next) {
+  console.log('Eliminando la imagen' + this.url)
+  uploadService.deleteImage(this.deleteHash)
+  return next()
 })
 
 imagenSchema.methods = {

@@ -23,7 +23,7 @@ public class MypastelesRecyclerViewAdapter extends RecyclerView.Adapter<Mypastel
     private final OnListProductoInteractionListener mListener;
     private Context ctx;
 
-    public MypastelesRecyclerViewAdapter(Context ctx, int Layaout, List<ProductoResponse> items, OnListProductoInteractionListener listener) {
+    public MypastelesRecyclerViewAdapter(Context ctx, int Layout, List<ProductoResponse> items, OnListProductoInteractionListener listener) {
         mValues = items;
         mListener = listener;
         this.ctx = ctx;

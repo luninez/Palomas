@@ -15,8 +15,7 @@ public class ProductoResponse {
     private boolean favorito;
     private Categoria categoriaId;
 
-    public ProductoResponse() {
-    }
+    public ProductoResponse() { }
 
     public String getId() {
         return id;

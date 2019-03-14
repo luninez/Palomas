@@ -18,7 +18,7 @@ const { nombre } = schema.tree
  * @apiParam {String} nombre Categoria's nombre.
  * @apiSuccess {Object} categoria Categoria's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Categoria not found. 
+ * @apiError 404 Categoria not found.
  * @apiError 401 Master access only.
  * @apiError 409 Email already registered.
  */

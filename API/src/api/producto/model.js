@@ -4,18 +4,18 @@ const productoSchema = new Schema({
   nombre: {
     type: String
   },
+  descripcion: {
+    type: String
+  },
   precio: {
     type: Number
   },
-  descripcion: {
-    type: String
+  favorito: {
+    type: Boolean
   },
   categoriaId: {
     type: Schema.Types.ObjectId,
     ref: 'Categoria'
-  },
-  favorito: {
-    type: Boolean
   }
 }, {
   timestamps: true,
@@ -31,11 +31,10 @@ productoSchema.methods = {
       // simple view
       id: this.id,
       nombre: this.nombre,
-      precio: this.precio,
       descripcion: this.descripcion,
-      categoriaId: this.categoriaId,
-      imagenes: this.imagenes,
+      precio: this.precio,
       favorito: this.favorito,
+      categoriaId: this.categoriaId,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }

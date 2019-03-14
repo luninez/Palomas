@@ -65,7 +65,7 @@ public class PastelesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pasteles_list, container, false);
 
-        swipe = view.findViewById(R.id.swipeTomas);
+        swipe = view.findViewById(R.id.swipePasteles);
 
         if (view instanceof SwipeRefreshLayout) {
             Context context = view.getContext();
@@ -100,17 +100,15 @@ public class PastelesFragment extends Fragment {
         return view;
     }
 
-
-
     public void cargarDatos(final RecyclerView recyclerView) {
         ProductoService productoService = ServiceGenerator.createService(ProductoService.class);
-        Call<List<ProductoResponse>> call = productoService.getProductos();
+        Call<ResponseContainer<ProductoResponse>> call = productoService.getProductos();
 
-        call.enqueue(new Callback<List<ProductoResponse>>() {
+        call.enqueue(new Callback<ResponseContainer<ProductoResponse>>() {
             @Override
-            public void onResponse(Call<List<ProductoResponse>> call, Response<List<ProductoResponse>> response) {
+            public void onResponse(Call<ResponseContainer<ProductoResponse>> call, Response<ResponseContainer<ProductoResponse>> response) {
                 if (response.isSuccessful()) {
-                    adapter = new MypastelesRecyclerViewAdapter(ctx, R.layout.fragment_pasteles, response.body(), mListener);
+                    adapter = new MypastelesRecyclerViewAdapter(ctx, R.layout.fragment_pasteles, response.body().getRows(), mListener);
                     recyclerView.setAdapter(adapter);
                 } else {
                     Toast.makeText(getContext(), "Error al obtener datos", Toast.LENGTH_LONG).show();
@@ -118,7 +116,7 @@ public class PastelesFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<ProductoResponse>> call, Throwable t) {
+            public void onFailure(Call<ResponseContainer<ProductoResponse>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

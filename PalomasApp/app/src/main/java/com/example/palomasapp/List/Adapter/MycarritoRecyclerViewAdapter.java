@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.palomasapp.Funcionalidades.Response.ProductoResponse;
+import com.example.palomasapp.Interfaz.OnListProductoInteractionListener;
+import com.example.palomasapp.List.fragment_list.BuscarpastelesFragment;
 import com.example.palomasapp.List.fragment_list.CategoriasFragment;
 import com.example.palomasapp.R;
 import com.example.palomasapp.dummy.DummyContent.DummyItem;
@@ -14,10 +17,10 @@ import java.util.List;
 
 public class MycarritoRecyclerViewAdapter extends RecyclerView.Adapter<MycarritoRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final CategoriasFragment.OnListFragmentInteractionListener mListener;
+    private final List<ProductoResponse> mValues;
+    private final OnListProductoInteractionListener mListener;
 
-    public MycarritoRecyclerViewAdapter(List<DummyItem> items, CategoriasFragment.OnListFragmentInteractionListener listener) {
+    public MycarritoRecyclerViewAdapter(List<ProductoResponse> items, OnListProductoInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }

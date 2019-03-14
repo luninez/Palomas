@@ -53,7 +53,7 @@ public class BuscarpastelesFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MybuscarpastelesRecyclerViewAdapter(DummyContent.ITEMS, (CategoriasFragment.OnListFragmentInteractionListener) mListener));
+            recyclerView.setAdapter(new MybuscarpastelesRecyclerViewAdapter(DummyContent.ITEMS, (BuscarpastelesFragment.OnListFragmentInteractionListener) mListener));
         }
         return view;
     }

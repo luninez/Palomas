@@ -7,25 +7,24 @@ import { token, master } from '../../services/passport'
 export Producto, { schema } from './model'
 
 const router = new Router()
-const { nombre, precio, descripcion, categoriaId, imagenes, favorito } = schema.tree
+const { nombre, descripcion, precio, favorito, categoriaId } = schema.tree
 
 /**
  * @api {post} /productos Create producto
  * @apiName CreateProducto
  * @apiGroup Producto
  * @apiParam nombre Producto's nombre.
- * @apiParam precio Producto's precio.
  * @apiParam descripcion Producto's descripcion.
- * @apiParam categoriaId Producto's categoriaId.
- * @apiParam imagenes Producto's imagenes.
+ * @apiParam precio Producto's precio.
  * @apiParam favorito Producto's favorito.
+ * @apiParam categoriaId Producto's categoriaId.
  * @apiSuccess {Object} producto Producto's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Producto not found.
  */
 router.post('/',
   token({required: true, roles: ['admin']}),
-  body({ nombre, precio, descripcion, categoriaId, imagenes, favorito }),
+  body({ nombre, descripcion, precio, favorito, categoriaId }),
   create)
 
 /**
@@ -33,7 +32,8 @@ router.post('/',
  * @apiName RetrieveProductos
  * @apiGroup Producto
  * @apiUse listParams
- * @apiSuccess {Object[]} productos List of productos.
+ * @apiSuccess {Number} count Total amount of productos.
+ * @apiSuccess {Object[]} rows List of productos.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
 router.get('/',
@@ -58,18 +58,17 @@ router.get('/:id',
  * @apiName UpdateProducto
  * @apiGroup Producto
  * @apiParam nombre Producto's nombre.
- * @apiParam precio Producto's precio.
  * @apiParam descripcion Producto's descripcion.
- * @apiParam categoriaId Producto's categoriaId.
- * @apiParam imagenes Producto's imagenes.
+ * @apiParam precio Producto's precio.
  * @apiParam favorito Producto's favorito.
+ * @apiParam categoriaId Producto's categoriaId.
  * @apiSuccess {Object} producto Producto's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Producto not found.
  */
 router.put('/:id',
   token({required: true, roles: ['admin']}),
-  body({ nombre, precio, descripcion, categoriaId, imagenes, favorito }),
+  body({ nombre, descripcion, precio, favorito, categoriaId }),
   update)
 
 /**

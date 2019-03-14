@@ -11,16 +11,20 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.example.palomasapp.Funcionalidades.Response.ProductoResponse;
+import com.example.palomasapp.Interfaz.OnListCategoriaInteractionListener;
 import com.example.palomasapp.Interfaz.OnListProductoInteractionListener;
 import com.example.palomasapp.List.fragment_list.BuscarpastelesFragment;
 import com.example.palomasapp.List.fragment_list.CarritoFragment;
 import com.example.palomasapp.List.fragment_list.CategoriasFragment;
 import com.example.palomasapp.List.fragment_list.PastelesFragment;
+import com.example.palomasapp.Models.Categoria;
 import com.example.palomasapp.Models.Producto;
 import com.example.palomasapp.Perfil;
 import com.example.palomasapp.R;
 
-public class DashboardActivity extends AppCompatActivity implements OnListProductoInteractionListener {
+import java.util.List;
+
+public class DashboardActivity extends AppCompatActivity implements OnListProductoInteractionListener, OnListCategoriaInteractionListener {
 
     private TextView mTextMessage;
     private Fragment f;
@@ -119,6 +123,31 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
 
     @Override
     public void onFavoriteClickProducto(ProductoResponse p) {
+
+    }
+
+    @Override
+    public void onDeleteCategoriaClick(String id, String nombre) {
+
+    }
+
+    @Override
+    public void onEditCategoriaClick(Categoria c) {
+
+    }
+
+    @Override
+    public void onAddCategoriaClick(Categoria c) {
+
+    }
+
+    @Override
+    public void onInfoClickCategoria(Categoria c) {
+
+    }
+
+    @Override
+    public void onGoToProductoClick(List<Producto> productos) {
 
     }
 }

@@ -14,22 +14,22 @@ beforeEach(async () => {
 test('POST /productos 201', async () => {
   const { status, body } = await request(app())
     .post(`${apiRoot}`)
-    .send({ nombre: 'test', precio: 'test', descripcion: 'test', categoriaId: 'test', imagenes: 'test', favorito: 'test' })
+    .send({ nombre: 'test', descripcion: 'test', precio: 'test', favorito: 'test', categoriaId: 'test' })
   expect(status).toBe(201)
   expect(typeof body).toEqual('object')
   expect(body.nombre).toEqual('test')
-  expect(body.precio).toEqual('test')
   expect(body.descripcion).toEqual('test')
-  expect(body.categoriaId).toEqual('test')
-  expect(body.imagenes).toEqual('test')
+  expect(body.precio).toEqual('test')
   expect(body.favorito).toEqual('test')
+  expect(body.categoriaId).toEqual('test')
 })
 
 test('GET /productos 200', async () => {
   const { status, body } = await request(app())
     .get(`${apiRoot}`)
   expect(status).toBe(200)
-  expect(Array.isArray(body)).toBe(true)
+  expect(Array.isArray(body.rows)).toBe(true)
+  expect(Number.isNaN(body.count)).toBe(false)
 })
 
 test('GET /productos/:id 200', async () => {
@@ -49,22 +49,21 @@ test('GET /productos/:id 404', async () => {
 test('PUT /productos/:id 200', async () => {
   const { status, body } = await request(app())
     .put(`${apiRoot}/${producto.id}`)
-    .send({ nombre: 'test', precio: 'test', descripcion: 'test', categoriaId: 'test', imagenes: 'test', favorito: 'test' })
+    .send({ nombre: 'test', descripcion: 'test', precio: 'test', favorito: 'test', categoriaId: 'test' })
   expect(status).toBe(200)
   expect(typeof body).toEqual('object')
   expect(body.id).toEqual(producto.id)
   expect(body.nombre).toEqual('test')
-  expect(body.precio).toEqual('test')
   expect(body.descripcion).toEqual('test')
-  expect(body.categoriaId).toEqual('test')
-  expect(body.imagenes).toEqual('test')
+  expect(body.precio).toEqual('test')
   expect(body.favorito).toEqual('test')
+  expect(body.categoriaId).toEqual('test')
 })
 
 test('PUT /productos/:id 404', async () => {
   const { status } = await request(app())
     .put(apiRoot + '/123456789098765432123456')
-    .send({ nombre: 'test', precio: 'test', descripcion: 'test', categoriaId: 'test', imagenes: 'test', favorito: 'test' })
+    .send({ nombre: 'test', descripcion: 'test', precio: 'test', favorito: 'test', categoriaId: 'test' })
   expect(status).toBe(404)
 })
 

@@ -9,10 +9,6 @@ export const create = ({ bodymen: { body } }, res, next) =>
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   LineaPedido.count(query)
-    .populate('pedidoId')
-    .exec()
-    .populate('productoId')
-    .exec()
     .then(count => LineaPedido.find(query, select, cursor)
       .then((lineaPedidos) => ({
         count,

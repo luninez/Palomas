@@ -9,11 +9,11 @@ const lineaPedidoSchema = new Schema({
   },
   pedidoId: {
     type: Schema.Types.ObjectId,
-    ref: 'pedido'
+    ref: 'Pedido'
   },
   productoId: {
     type: Schema.Types.ObjectId,
-    ref: 'producto'
+    ref: 'Producto'
   }
 }, {
   timestamps: true,
