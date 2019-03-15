@@ -31,6 +31,7 @@ lineaPedidoSchema.methods = {
       cantidad: this.cantidad,
       precio: this.precio,
       pedidoId: this.pedidoId,
+      productoId: this.productoId,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }

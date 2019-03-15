@@ -4,11 +4,20 @@ import java.time.LocalDate;
 
 public class PedidoResponse {
 
+    private String id;
     private String estado;
     private LocalDate fecha;
     private String usuarioId;
 
     public PedidoResponse() { }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getEstado() {
         return estado;
@@ -38,6 +47,7 @@ public class PedidoResponse {
     public String toString() {
         return "PedidoResponse{" +
                 "estado='" + estado + '\'' +
+                ", id='" + id + '\'' +
                 ", fecha=" + fecha +
                 ", usuarioId='" + usuarioId + '\'' +
                 '}';

@@ -8,24 +8,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.palomasapp.Funcionalidades.Response.CategoriaResponse;
-import com.example.palomasapp.Funcionalidades.Response.ProductoResponse;
-import com.example.palomasapp.Interfaz.OnListCategoriaInteractionListener;
-import com.example.palomasapp.List.fragment_list.CategoriasFragment;
-import com.example.palomasapp.Models.Categoria;
+import com.bumptech.glide.Glide;
+import com.example.palomasapp.Funcionalidades.Response.CategoriaConImagenResponse;
+import com.example.palomasapp.Interfaz.OnListCategoriaConImagenInteractionListener;
 import com.example.palomasapp.R;
-import com.example.palomasapp.dummy.DummyContent;
 
 import java.util.List;
 
 
 public class MycategoriasRecyclerViewAdapter extends RecyclerView.Adapter<MycategoriasRecyclerViewAdapter.ViewHolder> {
 
-    private final List<CategoriaResponse> mValues;
-    private final OnListCategoriaInteractionListener mListener;
+    private final List<CategoriaConImagenResponse> mValues;
+    private final OnListCategoriaConImagenInteractionListener mListener;
     private Context ctx;
 
-    public MycategoriasRecyclerViewAdapter(Context ctx, int Layout, List<CategoriaResponse> items, OnListCategoriaInteractionListener listener) {
+    public MycategoriasRecyclerViewAdapter(Context ctx, int Layout, List<CategoriaConImagenResponse> items, OnListCategoriaConImagenInteractionListener listener) {
         mValues = items;
         mListener = listener;
         this.ctx = ctx;
@@ -43,7 +40,12 @@ public class MycategoriasRecyclerViewAdapter extends RecyclerView.Adapter<Mycate
         holder.mItem = mValues.get(position);
         holder.nombre.setText(holder.mItem.getNombre());
 
-        // botones
+        Glide.with(ctx)
+                .load(holder.mItem.getPicture())
+                .fitCenter()
+                .into(holder.categoriaImg);
+
+        // click lista de pedidos filtrados por esa categoria
     }
 
     @Override
@@ -55,7 +57,7 @@ public class MycategoriasRecyclerViewAdapter extends RecyclerView.Adapter<Mycate
         public final View mView;
         public final TextView nombre;
         public final ImageView categoriaImg;
-        public CategoriaResponse mItem;
+        public CategoriaConImagenResponse mItem;
 
         public ViewHolder(View view) {
             super(view);

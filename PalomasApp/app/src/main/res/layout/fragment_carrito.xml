@@ -13,7 +13,7 @@
 
 
         <ImageView
-            android:id="@+id/imagenMedicamento"
+            android:id="@+id/carrito_item_imagen"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="16dp"
@@ -23,7 +23,7 @@
             app:srcCompat="@mipmap/ic_launcher" />
 
         <ImageButton
-            android:id="@+id/addMedToMy"
+            android:id="@+id/carrito_item_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -49,8 +49,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:text="TextView"
-            app:layout_constraintEnd_toStartOf="@+id/addMedToMy"
-            app:layout_constraintStart_toEndOf="@+id/imagenMedicamento"
+            app:layout_constraintEnd_toStartOf="@+id/carrito_item_delete"
+            app:layout_constraintStart_toEndOf="@+id/carrito_item_imagen"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -62,7 +62,7 @@
             android:layout_marginEnd="8dp"
             android:text="TextView"
             app:layout_constraintEnd_toStartOf="@+id/carrito_item_cantidad"
-            app:layout_constraintStart_toEndOf="@+id/imagenMedicamento"
+            app:layout_constraintStart_toEndOf="@+id/carrito_item_imagen"
             app:layout_constraintTop_toBottomOf="@+id/carrito_item_nombre" />
 
         <TextView
@@ -73,7 +73,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="TextView"
-            app:layout_constraintEnd_toStartOf="@+id/addMedToMy"
+            app:layout_constraintEnd_toStartOf="@+id/carrito_item_delete"
             app:layout_constraintStart_toEndOf="@+id/carrito_item_precio"
             app:layout_constraintTop_toBottomOf="@+id/carrito_item_nombre" />
 

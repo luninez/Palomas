@@ -1,28 +1,30 @@
 package com.example.palomasapp.List.Adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.palomasapp.Funcionalidades.Response.ProductoResponse;
-import com.example.palomasapp.Interfaz.OnListProductoInteractionListener;
-import com.example.palomasapp.List.fragment_list.BuscarpastelesFragment;
-import com.example.palomasapp.List.fragment_list.CategoriasFragment;
+import com.example.palomasapp.Funcionalidades.Response.LineaPedidosResponse;
+import com.example.palomasapp.Interfaz.OnListLineaPedidoInteractionListener;
 import com.example.palomasapp.R;
-import com.example.palomasapp.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 public class MycarritoRecyclerViewAdapter extends RecyclerView.Adapter<MycarritoRecyclerViewAdapter.ViewHolder> {
 
-    private final List<ProductoResponse> mValues;
-    private final OnListProductoInteractionListener mListener;
+    private final List<LineaPedidosResponse> mValues;
+    private final OnListLineaPedidoInteractionListener mListener;
+    private Context ctx;
 
-    public MycarritoRecyclerViewAdapter(List<ProductoResponse> items, OnListProductoInteractionListener listener) {
+    public MycarritoRecyclerViewAdapter(Context ctx, int Layout, List<LineaPedidosResponse> items, OnListLineaPedidoInteractionListener listener) {
         mValues = items;
         mListener = listener;
+        this.ctx = ctx;
     }
 
     @Override
@@ -35,19 +37,21 @@ public class MycarritoRecyclerViewAdapter extends RecyclerView.Adapter<Mycarrito
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.nombre.setText(holder.mItem.getProductoId().getNombre());
+        holder.precio.setText(Double.toString(holder.mItem.getPrecio()));
+        holder.cantidad.setText(Integer.toString(holder.mItem.getCantidad()));
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        // Glide.with(ctx).load(holder.mItem.getProductoId().).into(holder.lineaImg);
+
+        holder.lineaDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
+                //dialog delete linea de pedido
+                Toast.makeText(ctx, "En construccion", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -56,18 +60,31 @@ public class MycarritoRecyclerViewAdapter extends RecyclerView.Adapter<Mycarrito
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final ImageView lineaImg;
+        public final ImageView lineaDelete;
+        public final TextView nombre;
+        public final TextView precio;
+        public final TextView cantidad;
+        public LineaPedidosResponse mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mContentView = (TextView) view.findViewById(R.id.content);
+            lineaImg = view.findViewById(R.id.carrito_item_imagen);
+            lineaDelete = view.findViewById(R.id.carrito_item_delete);
+            nombre = view.findViewById(R.id.carrito_item_nombre);
+            precio = view.findViewById(R.id.carrito_item_precio);
+            cantidad = view.findViewById(R.id.carrito_item_cantidad);
+
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return "ViewHolder{" +
+                    "mView=" + mView +
+                    ", nombre=" + nombre +
+                    ", mItem=" + mItem +
+                    '}';
         }
     }
-}
+ }

@@ -11,13 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/producto_item_image"
-            android:layout_width="0dp"
-            android:layout_height="250dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!--<ImageView-->
+            <!--android:id="@+id/producto_item_image"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="250dp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
 
         <ImageView
             android:id="@+id/producto_btn_favorite"
@@ -50,7 +50,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/producto_btn_favorite"
-            tools:text="texto" />
+            tools:text="Nombre" />
 
         <TextView
             android:id="@+id/producto_item_precio"
@@ -62,7 +62,8 @@
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/producto_item_nombre" />
+            app:layout_constraintTop_toBottomOf="@+id/producto_item_nombre"
+            tools:text="Precio" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline4"
