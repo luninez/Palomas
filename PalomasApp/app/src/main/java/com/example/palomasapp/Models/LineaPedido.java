@@ -6,12 +6,12 @@ public class LineaPedido {
 
     private int cantidad;
     private double precio;
-    private String pedidoId;
-    private String productoId;
+    private Pedido pedidoId;
+    private Producto productoId;
 
     public LineaPedido() { }
 
-    public LineaPedido(int cantidad, double precio, String pedidoId, String productoId) {
+    public LineaPedido(int cantidad, double precio, Pedido pedidoId, Producto productoId) {
         this.cantidad = cantidad;
         this.precio = precio;
         this.pedidoId = pedidoId;
@@ -34,19 +34,19 @@ public class LineaPedido {
         this.precio = precio;
     }
 
-    public String getPedidoId() {
+    public Pedido getPedidoId() {
         return pedidoId;
     }
 
-    public void setPedidoId(String pedidoId) {
+    public void setPedidoId(Pedido pedidoId) {
         this.pedidoId = pedidoId;
     }
 
-    public String getProductoId() {
+    public Producto getProductoId() {
         return productoId;
     }
 
-    public void setProductoId(String productoId) {
+    public void setProductoId(Producto productoId) {
         this.productoId = productoId;
     }
 
@@ -71,8 +71,8 @@ public class LineaPedido {
         return "LineaPedido{" +
                 "cantidad=" + cantidad +
                 ", precio=" + precio +
-                ", pedidoId='" + pedidoId + '\'' +
-                ", productoId='" + productoId + '\'' +
+                ", pedidoId='" + pedidoId.toString() + '\'' +
+                ", productoId='" + productoId.toString() + '\'' +
                 '}';
     }
 }

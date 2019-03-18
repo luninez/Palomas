@@ -13,26 +13,33 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.example.palomasapp.Dialog.ProductoDelete;
 import com.example.palomasapp.Dialog.ProductoEdit;
 import com.example.palomasapp.Funcionalidades.Response.ProductoResponse;
+<<<<<<< HEAD
 import com.example.palomasapp.Funcionalidades.Util;
 import com.example.palomasapp.Interfaz.OnListCategoriaInteractionListener;
+=======
+import com.example.palomasapp.Interfaz.OnListCategoriaConImagenInteractionListener;
+import com.example.palomasapp.Interfaz.OnListLineaPedidoInteractionListener;
+>>>>>>> 8f880cac3e75e6ab9d711593a53dd414a4b87618
 import com.example.palomasapp.Interfaz.OnListProductoInteractionListener;
 import com.example.palomasapp.List.fragment_list.BuscarpastelesFragment;
 import com.example.palomasapp.List.fragment_list.CarritoFragment;
 import com.example.palomasapp.List.fragment_list.CategoriasFragment;
 import com.example.palomasapp.List.fragment_list.PastelesFragment;
-import com.example.palomasapp.Models.Categoria;
+import com.example.palomasapp.Models.CategoriaConImagen;
+import com.example.palomasapp.Models.LineaPedido;
 import com.example.palomasapp.Models.Producto;
 import com.example.palomasapp.Perfil;
 import com.example.palomasapp.R;
 
 import java.util.List;
 
-public class DashboardActivity extends AppCompatActivity implements OnListProductoInteractionListener, OnListCategoriaInteractionListener {
+public class DashboardActivity extends AppCompatActivity implements OnListProductoInteractionListener,
+                                                                    OnListCategoriaConImagenInteractionListener,
+                                                                    OnListLineaPedidoInteractionListener {
 
     private TextView mTextMessage;
     private Fragment f;
@@ -133,6 +140,7 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
 
     @Override
     public void onDeleteProductoClick(String id, String nombre) {
+<<<<<<< HEAD
         ProductoDelete f = ProductoDelete.newInstance(id, nombre);
         f.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -146,6 +154,9 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
         });
         FragmentManager fm = getSupportFragmentManager();
         f.show(fm, "DeleteProducto");
+=======
+        //cargar dialogo de deleteProducto
+>>>>>>> 8f880cac3e75e6ab9d711593a53dd414a4b87618
     }
 
     @Override
@@ -186,22 +197,37 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
     }
 
     @Override
-    public void onEditCategoriaClick(Categoria c) {
+    public void onEditCategoriaClick(CategoriaConImagen c) {
 
     }
 
     @Override
-    public void onAddCategoriaClick(Categoria c) {
+    public void onAddCategoriaClick(CategoriaConImagen c) {
 
     }
 
     @Override
-    public void onInfoClickCategoria(Categoria c) {
+    public void onInfoClickCategoria(CategoriaConImagen c) {
 
     }
 
     @Override
-    public void onGoToProductoClick(List<Producto> productos) {
+    public void onDeleteLineaPedidoClick(String id, String nombre) {
+
+    }
+
+    @Override
+    public void onEditLineaPedidoClick(LineaPedido p) {
+
+    }
+
+    @Override
+    public void onAddLineaPedidoClick(LineaPedido p) {
+
+    }
+
+    @Override
+    public void onInfoClickLineaPedido(LineaPedido p) {
 
     }
 }

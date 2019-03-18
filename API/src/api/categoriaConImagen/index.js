@@ -3,7 +3,11 @@ import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
 import { create, index, show, update, destroy } from './controller'
 import { schema } from './model'
+<<<<<<< HEAD
 import { token, master } from '../../services/passport'
+=======
+import { master, token } from '../../services/passport'
+>>>>>>> 8f880cac3e75e6ab9d711593a53dd414a4b87618
 export CategoriaConImagen, { schema } from './model'
 
 const router = new Router()

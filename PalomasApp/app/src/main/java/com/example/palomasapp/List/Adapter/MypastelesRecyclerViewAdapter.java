@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.palomasapp.Funcionalidades.Response.ProductoResponse;
@@ -45,7 +46,16 @@ public class MypastelesRecyclerViewAdapter extends RecyclerView.Adapter<Mypastel
         holder.btn_fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onFavoriteClickProducto(holder.mItem);
+                // mListener.onFavoriteClickProducto(holder.mItem);
+                Toast.makeText(ctx, "En construcion", Toast.LENGTH_SHORT).show();
+            }
+        });
+        
+        holder.btn_add_carrito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onDeleteProductoClick(holder.mItem.getId(), holder.mItem.getNombre());
+                Toast.makeText(ctx, "En construccion", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -57,7 +67,7 @@ public class MypastelesRecyclerViewAdapter extends RecyclerView.Adapter<Mypastel
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final ImageView image;
+        // public final ImageView image;
         public final TextView nombre;
         public final TextView precio;
         public final ImageView btn_fav;
@@ -67,7 +77,7 @@ public class MypastelesRecyclerViewAdapter extends RecyclerView.Adapter<Mypastel
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            image = view.findViewById(R.id.producto_item_image);
+            // image = view.findViewById(R.id.producto_item_image);
             nombre = view.findViewById(R.id.producto_item_nombre);
             precio = view.findViewById(R.id.producto_item_precio);
             btn_fav = view.findViewById(R.id.producto_btn_favorite);

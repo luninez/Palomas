@@ -2,7 +2,6 @@ import { Router } from 'express'
 import user from './user'
 import auth from './auth'
 import producto from './producto'
-import categoria from './categoria'
 import pedido from './pedido'
 import lineaPedido from './linea_pedido'
 import imagen from './imagen'
@@ -36,7 +35,6 @@ const router = new Router()
 router.use('/users', user)
 router.use('/auth', auth)
 router.use('/productos', producto)
-router.use('/categorias', categoria)
 router.use('/pedidos', pedido)
 router.use('/linea_pedidos', lineaPedido)
 router.use('/imagenes', imagen)

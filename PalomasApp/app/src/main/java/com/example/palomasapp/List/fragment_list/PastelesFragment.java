@@ -88,7 +88,7 @@ public class PastelesFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        // actualizarDatos();
+                        actualizarDatos();
                         swipe.setRefreshing(false);
                     }
                 }, 3000);
@@ -120,6 +120,10 @@ public class PastelesFragment extends Fragment {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void actualizarDatos(){
+        cargarDatos(recyclerView);
     }
 
     @Override

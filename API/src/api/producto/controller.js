@@ -10,7 +10,7 @@ export const create = ({ bodymen: { body } }, res, next) =>
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   Producto.count(query)
     .then(count => Producto.find(query, select, cursor)
-      .populate('categoriaId', 'nombre')
+      .populate('categoriaId')
       .then((productos) => ({
         count,
         rows: productos.map((producto) => producto.view())

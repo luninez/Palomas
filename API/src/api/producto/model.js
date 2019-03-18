@@ -15,7 +15,7 @@ const productoSchema = new Schema({
   },
   categoriaId: {
     type: Schema.Types.ObjectId,
-    ref: 'Categoria'
+    ref: 'CategoriaConImagen'
   }
 }, {
   timestamps: true,

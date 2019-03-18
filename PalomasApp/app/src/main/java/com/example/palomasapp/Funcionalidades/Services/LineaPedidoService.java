@@ -16,16 +16,16 @@ import retrofit2.http.Path;
 
 public interface LineaPedidoService {
 
-    @GET("/lineapedidos")
+    @GET("/linea_pedidos")
     Call<ResponseContainer<LineaPedidosResponse>> getLineaPedidos();
 
-    @POST("/lineapedidos")
+    @POST("/linea_pedidos")
     Call<LineaPedidosResponse> addLineaPedidos(@Body LineaPedido p);
 
-    @PUT("lineapedidos/{id}")
+    @PUT("/linea_pedidos/{id}")
     Call<LineaPedidosResponse> editLineaPedidos(@Path("id") String id, @Body LineaPedido p);
 
-    @DELETE("/lineapedidos/{id}")
+    @DELETE("/linea_pedidos/{id}")
     Call<LineaPedidosResponse> deleteLineaPedidos(@Path("id") String id);
 
 }

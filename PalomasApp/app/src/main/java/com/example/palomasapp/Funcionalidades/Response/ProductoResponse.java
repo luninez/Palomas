@@ -1,10 +1,6 @@
 package com.example.palomasapp.Funcionalidades.Response;
 
-import com.example.palomasapp.Models.Categoria;
-import com.example.palomasapp.Models.Producto;
-
-import java.util.List;
-import java.util.Objects;
+import com.example.palomasapp.Models.CategoriaConImagen;
 
 public class ProductoResponse {
 
@@ -13,7 +9,11 @@ public class ProductoResponse {
     private String descripcion;
     private double precio;
     private boolean favorito;
+<<<<<<< HEAD
     private String categoriaId;
+=======
+    private CategoriaConImagen categoriaId;
+>>>>>>> 8f880cac3e75e6ab9d711593a53dd414a4b87618
 
     public ProductoResponse() { }
 
@@ -57,11 +57,19 @@ public class ProductoResponse {
         this.favorito = favorito;
     }
 
+<<<<<<< HEAD
     public String getCategoriaId() {
         return categoriaId;
     }
 
     public void setCategoriaId(String categoriaId) {
+=======
+    public CategoriaConImagen getCategoriaId() {
+        return categoriaId;
+    }
+
+    public void setCategoriaId(CategoriaConImagen categoriaId) {
+>>>>>>> 8f880cac3e75e6ab9d711593a53dd414a4b87618
         this.categoriaId = categoriaId;
     }
 
