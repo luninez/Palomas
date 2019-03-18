@@ -71,6 +71,7 @@
             android:orientation="vertical"
             app:layout_constraintGuide_begin="169dp" />
 
+
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

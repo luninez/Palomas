@@ -52,7 +52,8 @@ public class RegistroActivity extends AppCompatActivity {
 
         Util.setData(RegistroActivity.this, response.body().getToken(), response.body().getUser().getId(),
                 response.body().getUser().getEmail(),response.body().getUser().getName()
-                ,response.body().getUser().getPicture());
+                ,response.body().getUser().getPicture()
+                ,response.body().getUser().getRole());
 
         startActivity(new Intent(RegistroActivity.this, DashboardActivity.class));
 

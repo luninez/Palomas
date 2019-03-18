@@ -35,8 +35,6 @@ public class MycarritoRecyclerViewAdapter extends RecyclerView.Adapter<Mycarrito
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mContentView.setText(mValues.get(position).content);
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 public class Util {
 
-    public static void setData(Context ctx, String token, String user_id, String user_email, String user_name, String user_photo) {
+    public static void setData(Context ctx, String token, String user_id, String user_email, String user_name, String user_photo, String user_role) {
 
         SharedPreferences prefs = ctx.getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -14,6 +14,7 @@ public class Util {
         editor.putString("emailUser", user_email);
         editor.putString("nombreUser", user_name);
         editor.putString("fotoUser", user_photo);
+        editor.putString("roleUser", user_role);
         editor.commit();
 
     }
@@ -53,20 +54,11 @@ public class Util {
         editor.commit();
     }
 
-    public static void setIdMedicamento(Context ctx, String value) {
+
+    public static String getUserRole(Context ctx) {
 
         SharedPreferences prefs = ctx.getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("nRegistro",value);
-        editor.commit();
-
-
-    }
-
-    public static String getIdMedicamento(Context ctx) {
-
-        SharedPreferences prefs = ctx.getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-        return prefs.getString("nRegistro",null);
+        return prefs.getString("roleUser",null);
     }
 
 

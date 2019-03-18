@@ -13,7 +13,7 @@ public class ProductoResponse {
     private String descripcion;
     private double precio;
     private boolean favorito;
-    private Categoria categoriaId;
+    private String categoriaId;
 
     public ProductoResponse() { }
 
@@ -57,11 +57,11 @@ public class ProductoResponse {
         this.favorito = favorito;
     }
 
-    public Categoria getCategoriaId() {
+    public String getCategoriaId() {
         return categoriaId;
     }
 
-    public void setCategoriaId(Categoria categoriaId) {
+    public void setCategoriaId(String categoriaId) {
         this.categoriaId = categoriaId;
     }
 

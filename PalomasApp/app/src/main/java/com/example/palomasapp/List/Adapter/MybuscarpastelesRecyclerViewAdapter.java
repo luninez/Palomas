@@ -1,11 +1,14 @@
 package com.example.palomasapp.List.Adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.palomasapp.Funcionalidades.Response.ProductoResponse;
+import com.example.palomasapp.Interfaz.OnListProductoInteractionListener;
 import com.example.palomasapp.List.fragment_list.BuscarpastelesFragment;
 import com.example.palomasapp.List.fragment_list.CategoriasFragment;
 import com.example.palomasapp.R;
@@ -16,12 +19,14 @@ import java.util.List;
 
 public class MybuscarpastelesRecyclerViewAdapter extends RecyclerView.Adapter<MybuscarpastelesRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final BuscarpastelesFragment.OnListFragmentInteractionListener mListener;
+    private final List<ProductoResponse> mValues;
+    private final OnListProductoInteractionListener mListener;
+    private Context ctx;
 
-    public MybuscarpastelesRecyclerViewAdapter(List<DummyItem> items, BuscarpastelesFragment.OnListFragmentInteractionListener listener) {
+    public MybuscarpastelesRecyclerViewAdapter(Context ctx, int layout, List<ProductoResponse> items, OnListProductoInteractionListener listener) {
         mValues = items;
         mListener = listener;
+        this.ctx = ctx;
     }
 
     @Override
@@ -34,7 +39,6 @@ public class MybuscarpastelesRecyclerViewAdapter extends RecyclerView.Adapter<My
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mContentView.setText(mValues.get(position).content);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

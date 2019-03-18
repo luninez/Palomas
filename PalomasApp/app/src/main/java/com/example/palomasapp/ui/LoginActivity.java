@@ -59,7 +59,8 @@ public class LoginActivity extends AppCompatActivity {
 
         Util.setData(LoginActivity.this, response.body().getToken(), response.body().getUser().getId(),
                 response.body().getUser().getEmail(),response.body().getUser().getName()
-                ,response.body().getUser().getPicture());
+                ,response.body().getUser().getPicture()
+                ,response.body().getUser().getRole());
 
         startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
         finish();

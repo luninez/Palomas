@@ -27,7 +27,7 @@ public interface ProductoService {
     Call<Producto> addProducto(@Body Producto p);
 
     @PUT("productos/{id}")
-    Call<ProductoResponse> editOne(@Path("id") String id, @Body Producto p);
+    Call<ProductoResponse> editProducto(@Path("id") String id, @Body Producto p);
 
     @DELETE("/productos/{id}")
     Call<ProductoResponse> deleteProducto(@Path("id") String id);

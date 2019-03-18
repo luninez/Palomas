@@ -6,6 +6,7 @@ import categoria from './categoria'
 import pedido from './pedido'
 import lineaPedido from './linea_pedido'
 import imagen from './imagen'
+import categoriaConImagen from './categoriaConImagen'
 
 const router = new Router()
 
@@ -40,5 +41,6 @@ router.use('/pedidos', pedido)
 router.use('/linea_pedidos', lineaPedido)
 router.use('/imagenes', imagen)
 router.use('/productos', producto)
+router.use('/categoriaConImagenes', categoriaConImagen)
 
 export default router

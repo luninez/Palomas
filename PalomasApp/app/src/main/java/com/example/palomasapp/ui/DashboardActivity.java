@@ -1,16 +1,24 @@
 package com.example.palomasapp.ui;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.example.palomasapp.Dialog.ProductoDelete;
+import com.example.palomasapp.Dialog.ProductoEdit;
 import com.example.palomasapp.Funcionalidades.Response.ProductoResponse;
+import com.example.palomasapp.Funcionalidades.Util;
 import com.example.palomasapp.Interfaz.OnListCategoriaInteractionListener;
 import com.example.palomasapp.Interfaz.OnListProductoInteractionListener;
 import com.example.palomasapp.List.fragment_list.BuscarpastelesFragment;
@@ -28,6 +36,7 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
 
     private TextView mTextMessage;
     private Fragment f;
+    private FloatingActionButton fab;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -36,6 +45,7 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
             BottomNavigationView n = findViewById(R.id.navigation);
+            fab = findViewById(R.id.fab);
 
             Menu menu = n.getMenu();
             menu.findItem(R.id.navigation_home).setIcon(R.drawable.ic_home_black_24dp);
@@ -52,6 +62,10 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
                             .replace(R.id.containerFragmentMain, new PastelesFragment(), "home")
                             .commit();
 
+                    if(!Util.getUserRole(getApplicationContext()).equals("admin")){
+                        fab.hide();
+                    }
+
                     return true;
                 case R.id.navigation_search:
                     item.setIcon(R.drawable.ic_search_black_24dp);
@@ -59,6 +73,10 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
                             .beginTransaction()
                             .replace(R.id.containerFragmentMain, new BuscarpastelesFragment(), "search")
                             .commit();
+
+                    if(!Util.getUserRole(getApplicationContext()).equals("admin")){
+                        fab.hide();
+                    }
 
                     return true;
                 case R.id.navigation_category:
@@ -68,6 +86,10 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
                             .replace(R.id.containerFragmentMain, new CategoriasFragment(), "categorias")
                             .commit();
 
+                    if(!Util.getUserRole(getApplicationContext()).equals("admin")){
+                        fab.hide();
+                    }
+
                     return true;
                 case R.id.navigation_carrito:
                     item.setIcon(R.drawable.ic_carrito_black_24dp);
@@ -76,6 +98,10 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
                             .replace(R.id.containerFragmentMain, new CarritoFragment(), "carrito")
                             .commit();
 
+                    if(!Util.getUserRole(getApplicationContext()).equals("admin")){
+                        fab.hide();
+                    }
+
                     return true;
                 case R.id.navigation_perfil:
                     item.setIcon(R.drawable.ic_perfil_black_24dp);
@@ -83,6 +109,10 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
                             .beginTransaction()
                             .replace(R.id.containerFragmentMain, new Perfil(), "perfil")
                             .commit();
+
+                    if(!Util.getUserRole(getApplicationContext()).equals("admin")){
+                        fab.hide();
+                    }
 
                     return true;
             }
@@ -103,12 +133,36 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
 
     @Override
     public void onDeleteProductoClick(String id, String nombre) {
-
+        ProductoDelete f = ProductoDelete.newInstance(id, nombre);
+        f.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("mainFragment");
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.detach(currentFragment);
+                fragmentTransaction.attach(currentFragment);
+                fragmentTransaction.commit();
+            }
+        });
+        FragmentManager fm = getSupportFragmentManager();
+        f.show(fm, "DeleteProducto");
     }
 
     @Override
-    public void onEditProductoClick(Producto p) {
-
+    public void onEditProductoClick(ProductoResponse p) {
+        ProductoEdit f = ProductoEdit.newInstance(p);
+        f.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("mainFragment");
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.detach(currentFragment);
+                fragmentTransaction.attach(currentFragment);
+                fragmentTransaction.commit();
+            }
+        });
+        FragmentManager fm = getSupportFragmentManager();
+        f.show(fm, "EditarPersona");
     }
 
     @Override
