@@ -10,6 +10,4 @@ public interface OnListImagenInteractionListener {
 
     public void onAddImagenClick(Imagen i);
 
-    public void onInfoClickImagen(Imagen i);
-
 }

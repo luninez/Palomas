@@ -5,25 +5,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.palomasapp.Funcionalidades.Response.ProductoResponse;
 import com.example.palomasapp.Interfaz.OnListProductoInteractionListener;
-import com.example.palomasapp.List.fragment_list.BuscarpastelesFragment;
-import com.example.palomasapp.List.fragment_list.CategoriasFragment;
+import com.example.palomasapp.Models.Producto;
 import com.example.palomasapp.R;
-import com.example.palomasapp.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
-
 public class MybuscarpastelesRecyclerViewAdapter extends RecyclerView.Adapter<MybuscarpastelesRecyclerViewAdapter.ViewHolder> {
 
-    private final List<ProductoResponse> mValues;
+    private final List<Producto> mValues;
     private final OnListProductoInteractionListener mListener;
     private Context ctx;
 
-    public MybuscarpastelesRecyclerViewAdapter(Context ctx, int layout, List<ProductoResponse> items, OnListProductoInteractionListener listener) {
+    public MybuscarpastelesRecyclerViewAdapter(Context ctx, int Loyout, List<Producto> items, OnListProductoInteractionListener listener) {
         mValues = items;
         mListener = listener;
         this.ctx = ctx;
@@ -39,17 +36,18 @@ public class MybuscarpastelesRecyclerViewAdapter extends RecyclerView.Adapter<My
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
+        holder.nombre.setText(holder.mItem.getNombre());
+        holder.precio.setText(Double.toString(holder.mItem.getPrecio()));
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        // activar fotos
+
+        holder.btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
+                //añadir al carrito
             }
         });
+
     }
 
     @Override
@@ -59,18 +57,31 @@ public class MybuscarpastelesRecyclerViewAdapter extends RecyclerView.Adapter<My
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView nombre;
+        public final TextView precio;
+        public final ImageView imagen;
+        public final ImageView btn_add;
+        public Producto mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mContentView = (TextView) view.findViewById(R.id.content);
+            nombre = view.findViewById(R.id.buscar_item_nombre);
+            precio = view.findViewById(R.id.buscar_item_precio);
+            imagen = view.findViewById(R.id.buscar_item_image);
+            btn_add = view.findViewById(R.id.buscar_btn_add_carrito);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return "ViewHolder{" +
+                    "mView=" + mView +
+                    ", nombre=" + nombre +
+                    ", precio=" + precio +
+                    ", mItem=" + mItem +
+                    '}';
         }
     }
+
+
 }

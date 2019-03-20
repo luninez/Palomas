@@ -10,6 +10,4 @@ public interface OnListCategoriaConImagenInteractionListener {
 
     public void onAddCategoriaClick(CategoriaConImagen c);
 
-    public void onInfoClickCategoria(CategoriaConImagen c);
-
 }

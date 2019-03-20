@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Imagen {
 
+    private String id;
     private String url;
     private String productoId;
     private String deleteHash;
@@ -14,6 +15,14 @@ public class Imagen {
         this.url = url;
         this.productoId = productoId;
         this.deleteHash = deleteHash;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUrl() {
@@ -43,22 +52,24 @@ public class Imagen {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Imagen)) return false;
         Imagen imagen = (Imagen) o;
-        return Objects.equals(url, imagen.url) &&
+        return Objects.equals(id, imagen.id) &&
+                Objects.equals(url, imagen.url) &&
                 Objects.equals(productoId, imagen.productoId) &&
                 Objects.equals(deleteHash, imagen.deleteHash);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, productoId, deleteHash);
+        return Objects.hash(id, url, productoId, deleteHash);
     }
 
     @Override
     public String toString() {
         return "Imagen{" +
-                "url='" + url + '\'' +
+                "id='" + id + '\'' +
+                ", url='" + url + '\'' +
                 ", productoId='" + productoId + '\'' +
                 ", deleteHash='" + deleteHash + '\'' +
                 '}';

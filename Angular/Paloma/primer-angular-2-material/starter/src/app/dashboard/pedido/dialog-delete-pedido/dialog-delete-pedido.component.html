@@ -1,0 +1,9 @@
+<div fxLayout="column" fFlexFill>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Escribe 'eliminar'" [(ngModel)]="name">
+  </mat-form-field>
+  <br/>
+  <button mat-raised-button color="primary" *ngIf="correcto()" (click)="eliminarCategoria()">Eliminar</button>
+
+</div>

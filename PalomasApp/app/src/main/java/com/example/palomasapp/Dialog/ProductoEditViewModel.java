@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
-import com.example.palomasapp.Funcionalidades.Response.ProductoResponse;
 import com.example.palomasapp.Funcionalidades.ServiceGenerator;
 import com.example.palomasapp.Funcionalidades.Services.ProductoService;
 import com.example.palomasapp.Funcionalidades.Util;
@@ -23,11 +22,11 @@ public class ProductoEditViewModel extends AndroidViewModel {
 
     public void editProducto(Producto p, String id, final DialogInterface dialog) {
         ProductoService service = ServiceGenerator.createService(ProductoService.class, Util.getToken(getApplication().getApplicationContext()), TipoAutenticacion.JWT);
-        Call<ProductoResponse> call = service.editProducto(id, p);
+        Call<Producto> call = service.editProducto(id, p);
 
-        call.enqueue(new Callback<ProductoResponse>() {
+        call.enqueue(new Callback<Producto>() {
             @Override
-            public void onResponse(Call<ProductoResponse> call, Response<ProductoResponse> response) {
+            public void onResponse(Call<Producto> call, Response<Producto> response) {
                 if(response.isSuccessful()) {
                     dialog.dismiss();
                 } else {
@@ -36,7 +35,7 @@ public class ProductoEditViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<ProductoResponse> call, Throwable t) {
+            public void onFailure(Call<Producto> call, Throwable t) {
                 Toast.makeText(getApplication().getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

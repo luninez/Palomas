@@ -14,11 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.palomasapp.Funcionalidades.Response.CategoriaConImagenResponse;
 import com.example.palomasapp.Funcionalidades.ServiceGenerator;
 import com.example.palomasapp.Funcionalidades.Services.CategoriaConImagenService;
 import com.example.palomasapp.Interfaz.OnListCategoriaConImagenInteractionListener;
 import com.example.palomasapp.List.Adapter.MycategoriasRecyclerViewAdapter;
+import com.example.palomasapp.Models.CategoriaConImagen;
 import com.example.palomasapp.Models.ResponseContainer;
 import com.example.palomasapp.R;
 
@@ -96,11 +96,11 @@ public class CategoriasFragment extends Fragment {
 
     public void cargarDatos(final RecyclerView recyclerView) {
         CategoriaConImagenService categoriaService = ServiceGenerator.createService(CategoriaConImagenService.class);
-        Call<ResponseContainer<CategoriaConImagenResponse>> call = categoriaService.getCategorias();
+        Call<ResponseContainer<CategoriaConImagen>> call = categoriaService.getCategorias();
 
-        call.enqueue(new Callback<ResponseContainer<CategoriaConImagenResponse>>() {
+        call.enqueue(new Callback<ResponseContainer<CategoriaConImagen>>() {
             @Override
-            public void onResponse(Call<ResponseContainer<CategoriaConImagenResponse>> call, Response<ResponseContainer<CategoriaConImagenResponse>> response) {
+            public void onResponse(Call<ResponseContainer<CategoriaConImagen>> call, Response<ResponseContainer<CategoriaConImagen>> response) {
                 if (response.isSuccessful()) {
                     adapter = new MycategoriasRecyclerViewAdapter(ctx, R.layout.fragment_categorias, response.body().getRows(), mListener);
                     recyclerView.setAdapter(adapter);
@@ -110,7 +110,7 @@ public class CategoriasFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ResponseContainer<CategoriaConImagenResponse>> call, Throwable t) {
+            public void onFailure(Call<ResponseContainer<CategoriaConImagen>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

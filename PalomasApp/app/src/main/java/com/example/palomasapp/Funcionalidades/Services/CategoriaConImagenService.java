@@ -1,6 +1,5 @@
 package com.example.palomasapp.Funcionalidades.Services;
 
-import com.example.palomasapp.Funcionalidades.Response.CategoriaConImagenResponse;
 import com.example.palomasapp.Models.CategoriaConImagen;
 import com.example.palomasapp.Models.ResponseContainer;
 
@@ -15,15 +14,15 @@ import retrofit2.http.Path;
 public interface CategoriaConImagenService {
 
     @GET("/categoriaConImagenes")
-    Call<ResponseContainer<CategoriaConImagenResponse>> getCategorias();
+    Call<ResponseContainer<CategoriaConImagen>> getCategorias();
 
     @POST("/categoriaConImagenes")
-    Call<CategoriaConImagenResponse> addCategoria(@Body CategoriaConImagen c);
+    Call<CategoriaConImagen> addCategoria(@Body CategoriaConImagen c);
 
     @PUT("categoriaConImagenes/{id}")
-    Call<CategoriaConImagenResponse> editCategoria(@Path("id") String id, @Body CategoriaConImagen c);
+    Call<CategoriaConImagen> editCategoria(@Path("id") String id, @Body CategoriaConImagen c);
 
     @DELETE("/categoriaConImagenes/{id}")
-    Call<CategoriaConImagenResponse> deteleCategoria(@Path("id") String id);
+    Call<CategoriaConImagen> deteleCategoria(@Path("id") String id);
 
 }

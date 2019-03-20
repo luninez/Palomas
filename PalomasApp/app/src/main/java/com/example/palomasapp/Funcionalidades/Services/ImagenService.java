@@ -3,9 +3,7 @@ package com.example.palomasapp.Funcionalidades.Services;
 import android.media.Image;
 
 import com.example.palomasapp.Funcionalidades.Response.ImageResponse;
-import com.example.palomasapp.Funcionalidades.Response.LineaPedidosResponse;
 import com.example.palomasapp.Models.Imagen;
-import com.example.palomasapp.Models.LineaPedido;
 import com.example.palomasapp.Models.ResponseContainer;
 
 import retrofit2.Call;

@@ -9,19 +9,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.palomasapp.Funcionalidades.Response.LineaPedidosResponse;
 import com.example.palomasapp.Interfaz.OnListLineaPedidoInteractionListener;
+import com.example.palomasapp.Models.LineaPedido;
 import com.example.palomasapp.R;
 
 import java.util.List;
 
 public class MycarritoRecyclerViewAdapter extends RecyclerView.Adapter<MycarritoRecyclerViewAdapter.ViewHolder> {
 
-    private final List<LineaPedidosResponse> mValues;
+    private final List<LineaPedido> mValues;
     private final OnListLineaPedidoInteractionListener mListener;
     private Context ctx;
 
-    public MycarritoRecyclerViewAdapter(Context ctx, int Layout, List<LineaPedidosResponse> items, OnListLineaPedidoInteractionListener listener) {
+    public MycarritoRecyclerViewAdapter(Context ctx, int Layout, List<LineaPedido> items, OnListLineaPedidoInteractionListener listener) {
         mValues = items;
         mListener = listener;
         this.ctx = ctx;
@@ -37,9 +37,6 @@ public class MycarritoRecyclerViewAdapter extends RecyclerView.Adapter<Mycarrito
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-<<<<<<< HEAD
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-=======
         holder.nombre.setText(holder.mItem.getProductoId().getNombre());
         holder.precio.setText(Double.toString(holder.mItem.getPrecio()));
         holder.cantidad.setText(Integer.toString(holder.mItem.getCantidad()));
@@ -47,7 +44,6 @@ public class MycarritoRecyclerViewAdapter extends RecyclerView.Adapter<Mycarrito
         // Glide.with(ctx).load(holder.mItem.getProductoId().).into(holder.lineaImg);
 
         holder.lineaDelete.setOnClickListener(new View.OnClickListener() {
->>>>>>> 8f880cac3e75e6ab9d711593a53dd414a4b87618
             @Override
             public void onClick(View v) {
                 //dialog delete linea de pedido
@@ -69,7 +65,7 @@ public class MycarritoRecyclerViewAdapter extends RecyclerView.Adapter<Mycarrito
         public final TextView nombre;
         public final TextView precio;
         public final TextView cantidad;
-        public LineaPedidosResponse mItem;
+        public LineaPedido mItem;
 
         public ViewHolder(View view) {
             super(view);
@@ -91,4 +87,4 @@ public class MycarritoRecyclerViewAdapter extends RecyclerView.Adapter<Mycarrito
                     '}';
         }
     }
- }
+}

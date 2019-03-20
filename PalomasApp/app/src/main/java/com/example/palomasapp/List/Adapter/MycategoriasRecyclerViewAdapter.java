@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.palomasapp.Funcionalidades.Response.CategoriaConImagenResponse;
 import com.example.palomasapp.Interfaz.OnListCategoriaConImagenInteractionListener;
+import com.example.palomasapp.Models.CategoriaConImagen;
 import com.example.palomasapp.R;
 
 import java.util.List;
@@ -18,11 +18,11 @@ import java.util.List;
 
 public class MycategoriasRecyclerViewAdapter extends RecyclerView.Adapter<MycategoriasRecyclerViewAdapter.ViewHolder> {
 
-    private final List<CategoriaConImagenResponse> mValues;
+    private final List<CategoriaConImagen> mValues;
     private final OnListCategoriaConImagenInteractionListener mListener;
     private Context ctx;
 
-    public MycategoriasRecyclerViewAdapter(Context ctx, int Layout, List<CategoriaConImagenResponse> items, OnListCategoriaConImagenInteractionListener listener) {
+    public MycategoriasRecyclerViewAdapter(Context ctx, int Layout, List<CategoriaConImagen> items, OnListCategoriaConImagenInteractionListener listener) {
         mValues = items;
         mListener = listener;
         this.ctx = ctx;
@@ -42,10 +42,16 @@ public class MycategoriasRecyclerViewAdapter extends RecyclerView.Adapter<Mycate
 
         Glide.with(ctx)
                 .load(holder.mItem.getPicture())
-                .fitCenter()
                 .into(holder.categoriaImg);
 
-        // click lista de pedidos filtrados por esa categoria
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+            }
+        });
     }
 
     @Override
@@ -57,7 +63,7 @@ public class MycategoriasRecyclerViewAdapter extends RecyclerView.Adapter<Mycate
         public final View mView;
         public final TextView nombre;
         public final ImageView categoriaImg;
-        public CategoriaConImagenResponse mItem;
+        public CategoriaConImagen mItem;
 
         public ViewHolder(View view) {
             super(view);

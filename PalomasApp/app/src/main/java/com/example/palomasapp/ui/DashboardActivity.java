@@ -16,33 +16,35 @@ import android.widget.TextView;
 
 import com.example.palomasapp.Dialog.ProductoDelete;
 import com.example.palomasapp.Dialog.ProductoEdit;
-import com.example.palomasapp.Funcionalidades.Response.ProductoResponse;
-<<<<<<< HEAD
+import com.example.palomasapp.Funcionalidades.ServiceGenerator;
+import com.example.palomasapp.Funcionalidades.Services.ProductoService;
 import com.example.palomasapp.Funcionalidades.Util;
-import com.example.palomasapp.Interfaz.OnListCategoriaInteractionListener;
-=======
 import com.example.palomasapp.Interfaz.OnListCategoriaConImagenInteractionListener;
 import com.example.palomasapp.Interfaz.OnListLineaPedidoInteractionListener;
->>>>>>> 8f880cac3e75e6ab9d711593a53dd414a4b87618
 import com.example.palomasapp.Interfaz.OnListProductoInteractionListener;
 import com.example.palomasapp.List.fragment_list.BuscarpastelesFragment;
 import com.example.palomasapp.List.fragment_list.CarritoFragment;
 import com.example.palomasapp.List.fragment_list.CategoriasFragment;
 import com.example.palomasapp.List.fragment_list.PastelesFragment;
 import com.example.palomasapp.Models.CategoriaConImagen;
+import com.example.palomasapp.Models.EstadoPedido;
 import com.example.palomasapp.Models.LineaPedido;
+import com.example.palomasapp.Models.Pedido;
+import com.example.palomasapp.Models.PedidoActual;
 import com.example.palomasapp.Models.Producto;
+import com.example.palomasapp.Models.User;
 import com.example.palomasapp.Perfil;
 import com.example.palomasapp.R;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Calendar;
+
+import retrofit2.Call;
 
 public class DashboardActivity extends AppCompatActivity implements OnListProductoInteractionListener,
                                                                     OnListCategoriaConImagenInteractionListener,
                                                                     OnListLineaPedidoInteractionListener {
 
-    private TextView mTextMessage;
-    private Fragment f;
     private FloatingActionButton fab;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -69,7 +71,9 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
                             .replace(R.id.containerFragmentMain, new PastelesFragment(), "home")
                             .commit();
 
-                    if(!Util.getUserRole(getApplicationContext()).equals("admin")){
+                    if(Util.getUserRole(getApplication().getApplicationContext()) == "admin") {
+                        fab.show();
+                    }else{
                         fab.hide();
                     }
 
@@ -81,9 +85,7 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
                             .replace(R.id.containerFragmentMain, new BuscarpastelesFragment(), "search")
                             .commit();
 
-                    if(!Util.getUserRole(getApplicationContext()).equals("admin")){
-                        fab.hide();
-                    }
+                    fab.hide();
 
                     return true;
                 case R.id.navigation_category:
@@ -93,7 +95,9 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
                             .replace(R.id.containerFragmentMain, new CategoriasFragment(), "categorias")
                             .commit();
 
-                    if(!Util.getUserRole(getApplicationContext()).equals("admin")){
+                    if(Util.getUserRole(getApplication().getApplicationContext()) == "admin") {
+                        fab.show();
+                    }else{
                         fab.hide();
                     }
 
@@ -105,9 +109,7 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
                             .replace(R.id.containerFragmentMain, new CarritoFragment(), "carrito")
                             .commit();
 
-                    if(!Util.getUserRole(getApplicationContext()).equals("admin")){
-                        fab.hide();
-                    }
+                    fab.hide();
 
                     return true;
                 case R.id.navigation_perfil:
@@ -117,9 +119,7 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
                             .replace(R.id.containerFragmentMain, new Perfil(), "perfil")
                             .commit();
 
-                    if(!Util.getUserRole(getApplicationContext()).equals("admin")){
-                        fab.hide();
-                    }
+                    fab.hide();
 
                     return true;
             }
@@ -132,15 +132,25 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        fab = findViewById(R.id.fab);
+
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        getSupportFragmentManager().beginTransaction().add(R.id.containerFragmentMain, new PastelesFragment(), "home").commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.containerFragmentMain, new PastelesFragment(), "home")
+                .commit();
+
+
+        if(Util.getUserRole(getApplication().getApplicationContext()) == "admin") {
+            fab.show();
+        }else{
+            fab.hide();
+        }
     }
 
     @Override
     public void onDeleteProductoClick(String id, String nombre) {
-<<<<<<< HEAD
         ProductoDelete f = ProductoDelete.newInstance(id, nombre);
         f.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -154,13 +164,10 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
         });
         FragmentManager fm = getSupportFragmentManager();
         f.show(fm, "DeleteProducto");
-=======
-        //cargar dialogo de deleteProducto
->>>>>>> 8f880cac3e75e6ab9d711593a53dd414a4b87618
     }
 
     @Override
-    public void onEditProductoClick(ProductoResponse p) {
+    public void onEditProductoClick(Producto p) {
         ProductoEdit f = ProductoEdit.newInstance(p);
         f.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -179,16 +186,16 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
     @Override
     public void onAddProductoClick(Producto p) {
 
-    }
+        // TERMINAR
 
-    @Override
-    public void onInfoClickProducto(Producto p) {
+        if(PedidoActual.Instance().getPedido() == null) {
+            Pedido newPedido = new Pedido(EstadoPedido.PIDIENDO.toString(), Calendar.getInstance(), Util.getUserId(getApplication().getApplicationContext()));
+            PedidoActual.Instance().setPedido(newPedido);
 
-    }
-
-    @Override
-    public void onFavoriteClickProducto(ProductoResponse p) {
-
+            LineaPedido newLinea = new LineaPedido(1, p.getPrecio(), newPedido.getId(), p);
+        }else{
+            LineaPedido newLinea = new LineaPedido(1, p.getPrecio(), PedidoActual.Instance().getPedido().getId(), p);
+        }
     }
 
     @Override
@@ -207,11 +214,6 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
     }
 
     @Override
-    public void onInfoClickCategoria(CategoriaConImagen c) {
-
-    }
-
-    @Override
     public void onDeleteLineaPedidoClick(String id, String nombre) {
 
     }
@@ -226,8 +228,4 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
 
     }
 
-    @Override
-    public void onInfoClickLineaPedido(LineaPedido p) {
-
-    }
 }

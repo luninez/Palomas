@@ -14,22 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.palomasapp.Funcionalidades.Response.CategoriaConImagenResponse;
-import com.example.palomasapp.Funcionalidades.Response.LineaPedidosResponse;
 import com.example.palomasapp.Funcionalidades.ServiceGenerator;
-import com.example.palomasapp.Funcionalidades.Services.CategoriaConImagenService;
 import com.example.palomasapp.Funcionalidades.Services.LineaPedidoService;
 import com.example.palomasapp.Funcionalidades.Util;
 import com.example.palomasapp.Interfaz.OnListLineaPedidoInteractionListener;
-import com.example.palomasapp.Interfaz.OnListPedidoInteractionListener;
 import com.example.palomasapp.List.Adapter.MycarritoRecyclerViewAdapter;
-import com.example.palomasapp.List.Adapter.MycategoriasRecyclerViewAdapter;
 import com.example.palomasapp.Models.LineaPedido;
 import com.example.palomasapp.Models.ResponseContainer;
 import com.example.palomasapp.Models.TipoAutenticacion;
 import com.example.palomasapp.R;
-import com.example.palomasapp.dummy.DummyContent;
-import com.example.palomasapp.dummy.DummyContent.DummyItem;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -105,11 +98,11 @@ public class CarritoFragment extends Fragment {
 
     public void cargarDatos(final RecyclerView recyclerView) {
         LineaPedidoService lineaPedidoService = ServiceGenerator.createService(LineaPedidoService.class, Util.getToken(ctx), TipoAutenticacion.JWT);
-        Call<ResponseContainer<LineaPedidosResponse>> call = lineaPedidoService.getLineaPedidos();
+        Call<ResponseContainer<LineaPedido>> call = lineaPedidoService.getLineaPedidos();
 
-        call.enqueue(new Callback<ResponseContainer<LineaPedidosResponse>>() {
+        call.enqueue(new Callback<ResponseContainer<LineaPedido>>() {
             @Override
-            public void onResponse(Call<ResponseContainer<LineaPedidosResponse>> call, Response<ResponseContainer<LineaPedidosResponse>> response) {
+            public void onResponse(Call<ResponseContainer<LineaPedido>> call, Response<ResponseContainer<LineaPedido>> response) {
                 if (response.isSuccessful()) {
                     adapter = new MycarritoRecyclerViewAdapter(ctx, R.layout.fragment_carrito, response.body().getRows(), mListener);
                     recyclerView.setAdapter(adapter);
@@ -119,7 +112,7 @@ public class CarritoFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ResponseContainer<LineaPedidosResponse>> call, Throwable t) {
+            public void onFailure(Call<ResponseContainer<LineaPedido>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

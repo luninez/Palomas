@@ -10,6 +10,4 @@ public interface OnListLineaPedidoInteractionListener {
 
     public void onAddLineaPedidoClick(LineaPedido p);
 
-    public void onInfoClickLineaPedido(LineaPedido p);
-
 }

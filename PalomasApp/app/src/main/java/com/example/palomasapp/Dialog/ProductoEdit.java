@@ -8,22 +8,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.palomasapp.Funcionalidades.Response.CategoriaResponse;
-import com.example.palomasapp.Funcionalidades.Response.ProductoResponse;
 import com.example.palomasapp.Funcionalidades.ServiceGenerator;
-import com.example.palomasapp.Funcionalidades.Services.CategoriaService;
-import com.example.palomasapp.Funcionalidades.Services.ProductoService;
+import com.example.palomasapp.Funcionalidades.Services.CategoriaConImagenService;
 import com.example.palomasapp.Funcionalidades.Util;
-import com.example.palomasapp.Models.Categoria;
+import com.example.palomasapp.Models.CategoriaConImagen;
 import com.example.palomasapp.Models.Producto;
 import com.example.palomasapp.Models.ResponseContainer;
 import com.example.palomasapp.Models.TipoAutenticacion;
@@ -52,8 +47,8 @@ public class ProductoEdit extends DialogFragment {
     private String argId, argNombre, argPrecio, argDescripcion, argCategoriaId;
 
     private Spinner spinnerCategoriasId;
-    private ArrayAdapter<CategoriaResponse> categorias;
-    private List<CategoriaResponse> listCategorias;
+    private ArrayAdapter<CategoriaConImagen> categorias;
+    private List<CategoriaConImagen> listCategorias;
     private String categoriaId;
 
     public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
@@ -85,7 +80,7 @@ public class ProductoEdit extends DialogFragment {
         }
     }
 
-    public static ProductoEdit newInstance(ProductoResponse p){
+    public static ProductoEdit newInstance(Producto p){
         Bundle args = new Bundle();
         args.putString(ARG_NOMBRE, p.getNombre());
         args.putString(ARG_PRECIO, Double.toString(p.getPrecio()));
@@ -133,7 +128,7 @@ public class ProductoEdit extends DialogFragment {
                 Producto p = (Producto) spinnerCategoriasId.getSelectedItem();
                 categoriaId = p.getCategoriaId();
 
-                Producto producto = new Producto(argNombre, argDescripcion, Double.parseDouble(argPrecio), false,  argCategoriaId);
+                Producto producto = new Producto(argNombre, argDescripcion, Double.parseDouble(argPrecio), argCategoriaId);
                 mViewModel.editProducto(producto, argId, dialog);
 
 
@@ -152,12 +147,12 @@ public class ProductoEdit extends DialogFragment {
 
     public void cargarSpinner() {
 
-        CategoriaService service = ServiceGenerator.createService(CategoriaService.class, Util.getToken(this.getActivity()), TipoAutenticacion.JWT);
-        Call<ResponseContainer<CategoriaResponse>> call = service.getCategorias();
+        CategoriaConImagenService service = ServiceGenerator.createService(CategoriaConImagenService.class, Util.getToken(this.getActivity()), TipoAutenticacion.JWT);
+        Call<ResponseContainer<CategoriaConImagen>> call = service.getCategorias();
 
-        call.enqueue(new Callback<ResponseContainer<CategoriaResponse>>() {
+        call.enqueue(new Callback<ResponseContainer<CategoriaConImagen>>() {
             @Override
-            public void onResponse(Call<ResponseContainer<CategoriaResponse>> call, Response<ResponseContainer<CategoriaResponse>> response) {
+            public void onResponse(Call<ResponseContainer<CategoriaConImagen>> call, Response<ResponseContainer<CategoriaConImagen>> response) {
                 if (response.isSuccessful()) {
                     listCategorias = new ArrayList<>(response.body().getRows());
                     categorias = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, listCategorias);
@@ -168,7 +163,7 @@ public class ProductoEdit extends DialogFragment {
             }
 
             @Override
-            public void onFailure(Call<ResponseContainer<CategoriaResponse>> call, Throwable t) {
+            public void onFailure(Call<ResponseContainer<CategoriaConImagen>> call, Throwable t) {
 
                 Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_LONG).show();
             }

@@ -14,18 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.palomasapp.Funcionalidades.Response.ProductoResponse;
 import com.example.palomasapp.List.Adapter.MypastelesRecyclerViewAdapter;
 import com.example.palomasapp.Funcionalidades.ServiceGenerator;
 import com.example.palomasapp.Funcionalidades.Services.ProductoService;
-import com.example.palomasapp.Funcionalidades.Util;
 import com.example.palomasapp.Interfaz.OnListProductoInteractionListener;
 import com.example.palomasapp.Models.Producto;
 import com.example.palomasapp.Models.ResponseContainer;
-import com.example.palomasapp.Models.TipoAutenticacion;
 import com.example.palomasapp.R;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -102,11 +97,11 @@ public class PastelesFragment extends Fragment {
 
     public void cargarDatos(final RecyclerView recyclerView) {
         ProductoService productoService = ServiceGenerator.createService(ProductoService.class);
-        Call<ResponseContainer<ProductoResponse>> call = productoService.getProductos();
+        Call<ResponseContainer<Producto>> call = productoService.getProductos();
 
-        call.enqueue(new Callback<ResponseContainer<ProductoResponse>>() {
+        call.enqueue(new Callback<ResponseContainer<Producto>>() {
             @Override
-            public void onResponse(Call<ResponseContainer<ProductoResponse>> call, Response<ResponseContainer<ProductoResponse>> response) {
+            public void onResponse(Call<ResponseContainer<Producto>> call, Response<ResponseContainer<Producto>> response) {
                 if (response.isSuccessful()) {
                     adapter = new MypastelesRecyclerViewAdapter(ctx, R.layout.fragment_pasteles, response.body().getRows(), mListener);
                     recyclerView.setAdapter(adapter);
@@ -116,7 +111,7 @@ public class PastelesFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ResponseContainer<ProductoResponse>> call, Throwable t) {
+            public void onFailure(Call<ResponseContainer<Producto>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

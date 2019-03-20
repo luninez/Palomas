@@ -4,20 +4,27 @@ import java.util.Objects;
 
 public class Producto {
 
+    private String id;
     private String nombre;
     private String descripcion;
     private double precio;
-    private boolean favorito;
     private String categoriaId;
 
     public Producto() { }
 
-    public Producto(String nombre, String descripcion, double precio, boolean favorito, String categoriaId) {
+    public Producto(String nombre, String descripcion, double precio, String categoriaId) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.favorito = favorito;
         this.categoriaId = categoriaId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -44,14 +51,6 @@ public class Producto {
         this.precio = precio;
     }
 
-    public boolean isFavorito() {
-        return favorito;
-    }
-
-    public void setFavorito(boolean favorito) {
-        this.favorito = favorito;
-    }
-
     public String getCategoriaId() {
         return categoriaId;
     }
@@ -63,10 +62,10 @@ public class Producto {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Producto)) return false;
         Producto producto = (Producto) o;
         return Double.compare(producto.precio, precio) == 0 &&
-                favorito == producto.favorito &&
+                Objects.equals(id, producto.id) &&
                 Objects.equals(nombre, producto.nombre) &&
                 Objects.equals(descripcion, producto.descripcion) &&
                 Objects.equals(categoriaId, producto.categoriaId);
@@ -74,16 +73,16 @@ public class Producto {
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, descripcion, precio, favorito, categoriaId);
+        return Objects.hash(id, nombre, descripcion, precio, categoriaId);
     }
 
     @Override
     public String toString() {
         return "Producto{" +
-                "nombre='" + nombre + '\'' +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", precio=" + precio +
-                ", favorito=" + favorito +
                 ", categoriaId='" + categoriaId + '\'' +
                 '}';
     }

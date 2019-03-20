@@ -4,18 +4,27 @@ import java.util.Objects;
 
 public class LineaPedido {
 
+    private String id;
     private int cantidad;
     private double precio;
-    private Pedido pedidoId;
+    private String pedidoId;
     private Producto productoId;
 
     public LineaPedido() { }
 
-    public LineaPedido(int cantidad, double precio, Pedido pedidoId, Producto productoId) {
+    public LineaPedido(int cantidad, double precio, String pedidoId, Producto productoId) {
         this.cantidad = cantidad;
         this.precio = precio;
         this.pedidoId = pedidoId;
         this.productoId = productoId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getCantidad() {
@@ -34,11 +43,11 @@ public class LineaPedido {
         this.precio = precio;
     }
 
-    public Pedido getPedidoId() {
+    public String getPedidoId() {
         return pedidoId;
     }
 
-    public void setPedidoId(Pedido pedidoId) {
+    public void setPedidoId(String pedidoId) {
         this.pedidoId = pedidoId;
     }
 
@@ -53,25 +62,27 @@ public class LineaPedido {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof LineaPedido)) return false;
         LineaPedido that = (LineaPedido) o;
         return cantidad == that.cantidad &&
                 Double.compare(that.precio, precio) == 0 &&
+                Objects.equals(id, that.id) &&
                 Objects.equals(pedidoId, that.pedidoId) &&
                 Objects.equals(productoId, that.productoId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cantidad, precio, pedidoId, productoId);
+        return Objects.hash(id, cantidad, precio, pedidoId, productoId);
     }
 
     @Override
     public String toString() {
         return "LineaPedido{" +
-                "cantidad=" + cantidad +
+                "id=" + id +
+                ", cantidad=" + cantidad +
                 ", precio=" + precio +
-                ", pedidoId='" + pedidoId.toString() + '\'' +
+                ", pedidoId='" + pedidoId + '\'' +
                 ", productoId='" + productoId.toString() + '\'' +
                 '}';
     }

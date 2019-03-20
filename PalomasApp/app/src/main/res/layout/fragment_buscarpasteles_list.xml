@@ -1,13 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:name="com.example.palomasapp.buscarpastelesFragment"
+    android:id="@+id/swipeBuscarProducto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
-    tools:context=".List.fragment_list.buscarpastelesFragment"
-    tools:listitem="@layout/fragment_buscarpasteles" />
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/findProducto">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <EditText
+            android:id="@+id/findProducto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="Buscar"
+            android:inputType="textPersonName"
+            android:text="Palmera"
+            app:layout_constraintBottom_toTopOf="@+id/listBuscar"
+            app:layout_constraintEnd_toStartOf="@+id/btnBuscarProducto"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnBuscarProducto"
+            style="@android:style/Widget.Holo.ImageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/background_light"
+            app:layout_constraintBottom_toTopOf="@+id/listBuscar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/findProducto"
+            app:srcCompat="@drawable/ic_search_black_24dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listBuscar"
+            android:name="com.example.palomasapp.buscarpastelesFragment"
+            android:layout_width="match_parent"
+            android:layout_height="638dp"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/findProducto"
+            tools:context=".List.fragment_list.buscarpastelesFragment"
+            tools:listitem="@layout/fragment_buscarpasteles" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
