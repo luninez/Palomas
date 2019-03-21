@@ -12,17 +12,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.palomasapp.Funcionalidades.ServiceGenerator;
 import com.example.palomasapp.Funcionalidades.Services.LineaPedidoService;
+import com.example.palomasapp.Funcionalidades.Services.PedidoService;
 import com.example.palomasapp.Funcionalidades.Util;
 import com.example.palomasapp.Interfaz.OnListLineaPedidoInteractionListener;
 import com.example.palomasapp.List.Adapter.MycarritoRecyclerViewAdapter;
+import com.example.palomasapp.Models.EstadoPedido;
+import com.example.palomasapp.Models.GestoraPedido;
 import com.example.palomasapp.Models.LineaPedido;
+import com.example.palomasapp.Models.Pedido;
 import com.example.palomasapp.Models.ResponseContainer;
 import com.example.palomasapp.Models.TipoAutenticacion;
 import com.example.palomasapp.R;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,6 +44,8 @@ public class CarritoFragment extends Fragment {
     private Context ctx;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipe;
+    private Button btn_cerrarPedido;
+    private List<LineaPedido> lineaPedidoList;
 
     public CarritoFragment() { }
 
@@ -61,6 +70,8 @@ public class CarritoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carrito_list, container, false);
 
+        btn_cerrarPedido = view.findViewById(R.id.cerrar_pedido);
+
         swipe = view.findViewById(R.id.swipeCarrito);
 
         if (view instanceof SwipeRefreshLayout) {
@@ -75,7 +86,9 @@ public class CarritoFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             //LLAMADA API
-            cargarDatos(recyclerView);
+            //cargarDatos(recyclerView);
+
+            cargarDatosLocales();
         }
 
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -98,14 +111,14 @@ public class CarritoFragment extends Fragment {
 
     public void cargarDatos(final RecyclerView recyclerView) {
         LineaPedidoService lineaPedidoService = ServiceGenerator.createService(LineaPedidoService.class, Util.getToken(ctx), TipoAutenticacion.JWT);
-        Call<ResponseContainer<LineaPedido>> call = lineaPedidoService.getLineaPedidos();
+        Call<ResponseContainer<LineaPedido>> call = lineaPedidoService.getLineaPedidosPedioId(GestoraPedido.Instance().getPedido().getId());
 
         call.enqueue(new Callback<ResponseContainer<LineaPedido>>() {
             @Override
             public void onResponse(Call<ResponseContainer<LineaPedido>> call, Response<ResponseContainer<LineaPedido>> response) {
                 if (response.isSuccessful()) {
-                    adapter = new MycarritoRecyclerViewAdapter(ctx, R.layout.fragment_carrito, response.body().getRows(), mListener);
-                    recyclerView.setAdapter(adapter);
+                    lineaPedidoList = response.body().getRows();
+                    cargarDatosLocales();
                 } else {
                     Toast.makeText(getContext(), "Error al obtener datos", Toast.LENGTH_LONG).show();
                 }
@@ -118,8 +131,41 @@ public class CarritoFragment extends Fragment {
         });
     }
 
+    public void cargarDatosLocales(){
+        adapter = new MycarritoRecyclerViewAdapter(ctx, R.layout.fragment_carrito, GestoraPedido.Instance().getLineaPedidos(), mListener);
+        recyclerView.setAdapter(adapter);
+    }
+
     public void actualizarDatos(){
         cargarDatos(recyclerView);
+    }
+
+    public void cerrarPedido(){
+        btn_cerrarPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GestoraPedido.Instance().getPedido().setEstado(EstadoPedido.RECIBIDO.toString());
+                Pedido p = GestoraPedido.Instance().getPedido();
+                PedidoService service = ServiceGenerator.createService(PedidoService.class, Util.getToken(ctx), TipoAutenticacion.JWT);
+                Call<Pedido> call = service.editPedido(p.getId(), p);
+
+                call.enqueue(new Callback<Pedido>() {
+                    @Override
+                    public void onResponse(Call<Pedido> call, Response<Pedido> response) {
+                        if(response.isSuccessful()){
+                            cargarDatosLocales();
+                        }else{
+                            Toast.makeText(ctx, "Error al cerrar el pedido", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Pedido> call, Throwable t) {
+                        Toast.makeText(ctx, "No funka", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
     @Override

@@ -10,11 +10,15 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface CategoriaConImagenService {
 
     @GET("/categoriaConImagenes")
     Call<ResponseContainer<CategoriaConImagen>> getCategorias();
+
+    @GET("/categoriaConImagenes")
+    Call<ResponseContainer<CategoriaConImagen>> getCategoriasPorNombre(@Query("nombre") String nombre);
 
     @POST("/categoriaConImagenes")
     Call<CategoriaConImagen> addCategoria(@Body CategoriaConImagen c);

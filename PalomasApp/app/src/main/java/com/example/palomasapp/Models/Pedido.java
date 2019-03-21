@@ -7,12 +7,12 @@ public class Pedido {
 
     private String id;
     private String estado;
-    private Calendar fecha;
-    private String usuarioId;
+    private String fecha;
+    private User usuarioId;
 
     public Pedido() { }
 
-    public Pedido(String estado, Calendar fecha, String usuarioId) {
+    public Pedido(String estado, String fecha, User usuarioId) {
         this.estado = estado;
         this.fecha = fecha;
         this.usuarioId = usuarioId;
@@ -34,19 +34,19 @@ public class Pedido {
         this.estado = estado;
     }
 
-    public Calendar getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Calendar fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    public String getUsuarioId() {
+    public User getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(String usuarioId) {
+    public void setUsuarioId(User usuarioId) {
         this.usuarioId = usuarioId;
     }
 
@@ -72,7 +72,7 @@ public class Pedido {
                 "id='" + id + '\'' +
                 ", estado='" + estado + '\'' +
                 ", fecha=" + fecha +
-                ", usuarioId='" + usuarioId + '\'' +
+                ", usuarioId='" + usuarioId.toString() + '\'' +
                 '}';
     }
 }

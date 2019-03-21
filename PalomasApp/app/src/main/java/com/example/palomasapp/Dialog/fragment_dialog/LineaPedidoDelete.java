@@ -1,4 +1,4 @@
-package com.example.palomasapp.Dialog;
+package com.example.palomasapp.Dialog.fragment_dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -14,13 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.palomasapp.Dialog.ViewModel.LineaPedidoDeleteViewModel;
 import com.example.palomasapp.R;
 
-public class ProductoDelete extends DialogFragment {
+public class LineaPedidoDelete extends DialogFragment {
 
     private static final String ARG_NOMBRE = "nombre";
-    private static final String ARG_ID_PRODUCTO = "id_producto";
-    private ProductoDeleteViewModel mViewModel;
+    private static final String ARG_ID = "id";
+    private LineaPedidoDeleteViewModel mViewModel;
 
     private DialogInterface.OnDismissListener onDismissListener;
 
@@ -32,14 +33,14 @@ public class ProductoDelete extends DialogFragment {
         this.onDismissListener = onDismissListener;
     }
 
-    public static ProductoDelete newInstance() {
-        return new ProductoDelete();
+    public static LineaPedidoDelete newInstance() {
+        return new LineaPedidoDelete();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(ProductoDeleteViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(LineaPedidoDeleteViewModel.class);
     }
 
     @Override
@@ -48,16 +49,16 @@ public class ProductoDelete extends DialogFragment {
 
         if (getArguments() != null) {
             argNombre = getArguments().getString(ARG_NOMBRE);
-            argId = getArguments().getString(ARG_ID_PRODUCTO);
+            argId = getArguments().getString(ARG_ID);
         }
     }
 
-    public static ProductoDelete newInstance(String id, String nombre) {
+    public static LineaPedidoDelete newInstance(String id, String nombre) {
         Bundle args = new Bundle();
         args.putString(ARG_NOMBRE, nombre);
-        args.putString(ARG_ID_PRODUCTO, id);
+        args.putString(ARG_ID, id);
 
-        ProductoDelete fragment = new ProductoDelete();
+        LineaPedidoDelete fragment = new LineaPedidoDelete();
         fragment.setArguments(args);
 
         return fragment;
@@ -83,7 +84,7 @@ public class ProductoDelete extends DialogFragment {
                     public void onClick(final DialogInterface dialog, int id) {
                         String nombreEditado = nombre.getText().toString();
 
-                        mViewModel.deleteProducto(nombreEditado,argId, dialog);
+                        mViewModel.deleteLienaPedido(nombreEditado,argId, dialog);
                     }
                 })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

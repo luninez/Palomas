@@ -7,7 +7,7 @@
     tools:context=".Dialog.fragment_dialog.ProductoDelete">
 
     <TextView
-        android:id="@+id/productoDeleteName"
+        android:id="@+id/lineaDeleteName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

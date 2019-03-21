@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.palomasapp.Interfaz.OnListLineaPedidoInteractionListener;
 import com.example.palomasapp.Models.LineaPedido;
 import com.example.palomasapp.R;
@@ -41,12 +42,16 @@ public class MycarritoRecyclerViewAdapter extends RecyclerView.Adapter<Mycarrito
         holder.precio.setText(Double.toString(holder.mItem.getPrecio()));
         holder.cantidad.setText(Integer.toString(holder.mItem.getCantidad()));
 
-        // Glide.with(ctx).load(holder.mItem.getProductoId().).into(holder.lineaImg);
+        if(holder.mItem.getProductoId().getImagenes() == null){
+            Glide.with(ctx).load(R.drawable.noimg).into(holder.lineaImg);
+        }else {
+            Glide.with(ctx).load(holder.mItem.getProductoId().getImagenes().get(0)).into(holder.lineaImg);
+        }
 
         holder.lineaDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //dialog delete linea de pedido
+                mListener.onDeleteLineaPedidoClick(holder.mItem.getId(), holder.mItem.getProductoId().getNombre());
                 Toast.makeText(ctx, "En construccion", Toast.LENGTH_SHORT).show();
             }
         });

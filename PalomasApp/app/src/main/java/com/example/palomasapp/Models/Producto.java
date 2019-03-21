@@ -1,5 +1,6 @@
 package com.example.palomasapp.Models;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Producto {
@@ -8,15 +9,25 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private double precio;
-    private String categoriaId;
+    private CategoriaConImagen categoriaId;
+
+    private List<String> imagenes;
 
     public Producto() { }
 
-    public Producto(String nombre, String descripcion, double precio, String categoriaId) {
+    public Producto(String nombre, String descripcion, double precio, CategoriaConImagen categoriaId) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.categoriaId = categoriaId;
+    }
+
+    public Producto(String nombre, String descripcion, double precio, CategoriaConImagen categoriaId, List<String> imagenes) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.categoriaId = categoriaId;
+        this.imagenes = imagenes;
     }
 
     public String getId() {
@@ -51,12 +62,20 @@ public class Producto {
         this.precio = precio;
     }
 
-    public String getCategoriaId() {
+    public CategoriaConImagen getCategoriaId() {
         return categoriaId;
     }
 
-    public void setCategoriaId(String categoriaId) {
+    public void setCategoriaId(CategoriaConImagen categoriaId) {
         this.categoriaId = categoriaId;
+    }
+
+    public List<String> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<String> imagenes) {
+        this.imagenes = imagenes;
     }
 
     @Override
@@ -83,7 +102,7 @@ public class Producto {
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", precio=" + precio +
-                ", categoriaId='" + categoriaId + '\'' +
+                ", categoriaId='" + categoriaId.toString() + '\'' +
                 '}';
     }
 }

@@ -82,6 +82,7 @@ public class BuscarpastelesFragment extends Fragment {
             }
 
             buscarProducto();
+            actualizarDatos();
 
             swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
@@ -105,6 +106,8 @@ public class BuscarpastelesFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        ctx = context;
         if (context instanceof OnListProductoInteractionListener) {
             mListener = (OnListProductoInteractionListener) context;
         } else {
@@ -133,13 +136,13 @@ public class BuscarpastelesFragment extends Fragment {
                 progressDialog.show();
 
                 //*Para ocultar automáticamente el teclado del móvil cuando se le da al botón de Buscar*//
-                // InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
-                // imm.hideSoftInputFromWindow(buscarProductoPorNombre.getWindowToken(), 0);
+                InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(buscarProductoPorNombre.getWindowToken(), 0);
 
 
                 //*Petición al API*//
                 ProductoService service = ServiceGenerator.createService(ProductoService.class);
-                Call<ResponseContainer<Producto>> call = service.getProductos();
+                Call<ResponseContainer<Producto>> call = service.getBuscarProductos(findProducto);
 
                 call.enqueue(new Callback<ResponseContainer<Producto>>() {
                     @Override
@@ -177,7 +180,7 @@ public class BuscarpastelesFragment extends Fragment {
 
         //*Petición a nuestra API*//
         ProductoService service = ServiceGenerator.createService(ProductoService.class);
-        Call<ResponseContainer<Producto>> call = service.getProductos();
+        Call<ResponseContainer<Producto>> call = service.getBuscarProductos(findProducto);
 
         call.enqueue(new Callback<ResponseContainer<Producto>>() {
             @Override

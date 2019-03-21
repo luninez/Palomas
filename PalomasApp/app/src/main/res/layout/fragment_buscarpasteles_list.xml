@@ -29,6 +29,7 @@
             android:text="Palmera"
             app:layout_constraintBottom_toTopOf="@+id/listBuscar"
             app:layout_constraintEnd_toStartOf="@+id/btnBuscarProducto"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
@@ -49,10 +50,11 @@
             android:id="@+id/listBuscar"
             android:name="com.example.palomasapp.buscarpastelesFragment"
             android:layout_width="match_parent"
-            android:layout_height="638dp"
+            android:layout_height="wrap_content"
             app:layoutManager="LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/findProducto"
             tools:context=".List.fragment_list.buscarpastelesFragment"

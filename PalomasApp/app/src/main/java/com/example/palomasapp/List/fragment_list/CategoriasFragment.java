@@ -1,5 +1,6 @@
 package com.example.palomasapp.List.fragment_list;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,13 +13,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.palomasapp.Funcionalidades.ServiceGenerator;
 import com.example.palomasapp.Funcionalidades.Services.CategoriaConImagenService;
+import com.example.palomasapp.Funcionalidades.Services.ProductoService;
 import com.example.palomasapp.Interfaz.OnListCategoriaConImagenInteractionListener;
+import com.example.palomasapp.List.Adapter.MybuscarpastelesRecyclerViewAdapter;
 import com.example.palomasapp.List.Adapter.MycategoriasRecyclerViewAdapter;
 import com.example.palomasapp.Models.CategoriaConImagen;
+import com.example.palomasapp.Models.Producto;
 import com.example.palomasapp.Models.ResponseContainer;
 import com.example.palomasapp.R;
 
@@ -102,7 +108,7 @@ public class CategoriasFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseContainer<CategoriaConImagen>> call, Response<ResponseContainer<CategoriaConImagen>> response) {
                 if (response.isSuccessful()) {
-                    adapter = new MycategoriasRecyclerViewAdapter(ctx, R.layout.fragment_categorias, response.body().getRows(), mListener);
+                    adapter = new MycategoriasRecyclerViewAdapter(ctx, R.layout.fragment_categorias, response.body().getRows(), mListener, CategoriasFragment.this);
                     recyclerView.setAdapter(adapter);
                 } else {
                     Toast.makeText(getContext(), "Error al obtener datos", Toast.LENGTH_LONG).show();
@@ -118,6 +124,16 @@ public class CategoriasFragment extends Fragment {
 
     public void actualizarDatos(){
         cargarDatos(recyclerView);
+    }
+
+    public void pasarFiltro(String id) {
+        PastelesFragment fr = new PastelesFragment();
+        fr.filtrarPorCategoria = true;
+        fr.categoriaId = id;
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.containerFragmentMain, fr)
+                .commit();
     }
 
     @Override

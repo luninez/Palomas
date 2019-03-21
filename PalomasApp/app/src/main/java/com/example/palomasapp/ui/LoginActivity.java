@@ -51,6 +51,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        Util.setData(LoginActivity.this,
+                ""
+                ,""
+                ,""
+                ,""
+                ,""
+                ,"");
+
         doLogin();
     }
 
@@ -96,9 +104,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.Theme_AppCompat_DayNight_Dialog);
                 progressDialog.setIndeterminate(true);
-                progressDialog.setMessage("Autenticando...");
+                progressDialog.setMessage("Autentificando...");
                 progressDialog.show();
-
 
                 String emailTxt = email.getText().toString();
                 String passwordTxt = password.getText().toString();
@@ -141,8 +148,6 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
-
-
             }
         });
 

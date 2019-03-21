@@ -1,4 +1,4 @@
-package com.example.palomasapp.Dialog;
+package com.example.palomasapp.Dialog.ViewModel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;

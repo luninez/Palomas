@@ -20,7 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/noimg" />
 
         <ImageView
             android:id="@+id/buscar_btn_add_carrito"
@@ -33,28 +33,30 @@
             app:srcCompat="@drawable/ic_add_circle_outline_black_24dp" />
 
         <TextView
-            android:id="@+id/buscar_item_nombre"
+            android:id="@+id/buscar_item_precio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
             android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buscar_item_precio"
+            app:layout_constraintTop_toBottomOf="@+id/buscar_item_nombre"
             tools:text="texto" />
 
         <TextView
-            android:id="@+id/buscar_item_precio"
-            android:layout_width="395dp"
+            android:id="@+id/buscar_item_nombre"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/buscar_item_nombre"
+            app:layout_constraintBottom_toTopOf="@+id/buscar_item_precio"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buscar_btn_add_carrito" />

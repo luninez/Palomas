@@ -1,4 +1,4 @@
-package com.example.palomasapp.Dialog;
+package com.example.palomasapp.Dialog.fragment_dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.palomasapp.Dialog.ViewModel.ProductoEditViewModel;
 import com.example.palomasapp.Funcionalidades.ServiceGenerator;
 import com.example.palomasapp.Funcionalidades.Services.CategoriaConImagenService;
 import com.example.palomasapp.Funcionalidades.Util;
@@ -44,12 +45,13 @@ public class ProductoEdit extends DialogFragment {
 
     private View view;
     private TextView nombre, precio, descripcion;
-    private String argId, argNombre, argPrecio, argDescripcion, argCategoriaId;
+    private String argId, argNombre, argPrecio, argDescripcion;
+    private CategoriaConImagen argCategoriaId;
 
     private Spinner spinnerCategoriasId;
     private ArrayAdapter<CategoriaConImagen> categorias;
     private List<CategoriaConImagen> listCategorias;
-    private String categoriaId;
+    private CategoriaConImagen categoriaId;
 
     public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
         this.onDismissListener = onDismissListener;
@@ -73,7 +75,6 @@ public class ProductoEdit extends DialogFragment {
             argNombre = getArguments().getString(ARG_NOMBRE);
             argPrecio = getArguments().getString(ARG_PRECIO);
             argDescripcion = getArguments().getString(ARG_DESCRIPCION);
-            argCategoriaId = getArguments().getString(ARG_CATEGORIA);
 
             argId = getArguments().getString(ARG_ID);
 
@@ -85,7 +86,7 @@ public class ProductoEdit extends DialogFragment {
         args.putString(ARG_NOMBRE, p.getNombre());
         args.putString(ARG_PRECIO, Double.toString(p.getPrecio()));
         args.putString(ARG_DESCRIPCION, p.getDescripcion());
-        args.putString(ARG_CATEGORIA, p.getCategoriaId());
+        args.putString(ARG_CATEGORIA, p.getCategoriaId().getNombre());
 
         args.putString(ARG_ID, p.getId());
 
@@ -128,7 +129,7 @@ public class ProductoEdit extends DialogFragment {
                 Producto p = (Producto) spinnerCategoriasId.getSelectedItem();
                 categoriaId = p.getCategoriaId();
 
-                Producto producto = new Producto(argNombre, argDescripcion, Double.parseDouble(argPrecio), argCategoriaId);
+                Producto producto = new Producto(nombreProducto, descripcionProducto, Double.parseDouble(precioProducto), categoriaId);
                 mViewModel.editProducto(producto, argId, dialog);
 
 

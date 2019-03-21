@@ -11,13 +11,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.palomasapp.Dialog.ProductoDelete;
-import com.example.palomasapp.Dialog.ProductoEdit;
-import com.example.palomasapp.Funcionalidades.ServiceGenerator;
-import com.example.palomasapp.Funcionalidades.Services.ProductoService;
+import com.example.palomasapp.Dialog.fragment_dialog.LineaPedidoDelete;
+import com.example.palomasapp.Dialog.fragment_dialog.ProductoDelete;
+import com.example.palomasapp.Dialog.fragment_dialog.ProductoEdit;
 import com.example.palomasapp.Funcionalidades.Util;
 import com.example.palomasapp.Interfaz.OnListCategoriaConImagenInteractionListener;
 import com.example.palomasapp.Interfaz.OnListLineaPedidoInteractionListener;
@@ -27,19 +24,11 @@ import com.example.palomasapp.List.fragment_list.CarritoFragment;
 import com.example.palomasapp.List.fragment_list.CategoriasFragment;
 import com.example.palomasapp.List.fragment_list.PastelesFragment;
 import com.example.palomasapp.Models.CategoriaConImagen;
-import com.example.palomasapp.Models.EstadoPedido;
 import com.example.palomasapp.Models.LineaPedido;
-import com.example.palomasapp.Models.Pedido;
-import com.example.palomasapp.Models.PedidoActual;
+import com.example.palomasapp.Models.GestoraPedido;
 import com.example.palomasapp.Models.Producto;
-import com.example.palomasapp.Models.User;
-import com.example.palomasapp.Perfil;
+import com.example.palomasapp.Blanck.Perfil;
 import com.example.palomasapp.R;
-
-import java.time.LocalDate;
-import java.util.Calendar;
-
-import retrofit2.Call;
 
 public class DashboardActivity extends AppCompatActivity implements OnListProductoInteractionListener,
                                                                     OnListCategoriaConImagenInteractionListener,
@@ -141,6 +130,7 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
                 .add(R.id.containerFragmentMain, new PastelesFragment(), "home")
                 .commit();
 
+        GestoraPedido.Instance().cargarPedidosPendientes(getApplication().getApplicationContext());
 
         if(Util.getUserRole(getApplication().getApplicationContext()) == "admin") {
             fab.show();
@@ -180,22 +170,12 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
             }
         });
         FragmentManager fm = getSupportFragmentManager();
-        f.show(fm, "EditarPersona");
+        f.show(fm, "EditarProducto");
     }
 
     @Override
     public void onAddProductoClick(Producto p) {
 
-        // TERMINAR
-
-        if(PedidoActual.Instance().getPedido() == null) {
-            Pedido newPedido = new Pedido(EstadoPedido.PIDIENDO.toString(), Calendar.getInstance(), Util.getUserId(getApplication().getApplicationContext()));
-            PedidoActual.Instance().setPedido(newPedido);
-
-            LineaPedido newLinea = new LineaPedido(1, p.getPrecio(), newPedido.getId(), p);
-        }else{
-            LineaPedido newLinea = new LineaPedido(1, p.getPrecio(), PedidoActual.Instance().getPedido().getId(), p);
-        }
     }
 
     @Override
@@ -215,7 +195,19 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
 
     @Override
     public void onDeleteLineaPedidoClick(String id, String nombre) {
-
+        LineaPedidoDelete f = LineaPedidoDelete.newInstance(id, nombre);
+        f.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("mainFragment");
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.detach(currentFragment);
+                fragmentTransaction.attach(currentFragment);
+                fragmentTransaction.commit();
+            }
+        });
+        FragmentManager fm = getSupportFragmentManager();
+        f.show(fm, "DeleteLineaPedido");
     }
 
     @Override
