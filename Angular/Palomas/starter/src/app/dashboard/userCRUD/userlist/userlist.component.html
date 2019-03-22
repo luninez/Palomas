@@ -1,0 +1,22 @@
+<div fxLayout="row wrap">
+  <div fxFlex.gt-md="33.33%" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">
+    <mat-card class="pa-0" *ngFor="let user of arrayUsuarios.rows">
+      <div fxLayout="row">
+        <div class="media-grid compact bg-cover" fxFlex="40">
+          <img src="{{user.picture}}" width="80px" alt="">
+        </div>
+        <div class="pa-1" fxFlex>
+          <div fxLayout="column">
+            <span fxLayout="row">
+              <span class="mat-text-muted">&#9733;</span>
+            </span>
+            <div>
+              <p class="ma-0">{{user.name}}</p>
+              <p class="ma-0 pa-0 text-md">{{user.email}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

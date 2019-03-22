@@ -1,0 +1,30 @@
+<div fxLayout="row wrap">
+  <div *ngFor="let category of arrayCategories.rows">
+      <mat-card class="card font">
+          <mat-card-header>
+              <mat-card-title>{{category.name}}</mat-card-title>
+          </mat-card-header>
+          <img *ngIf="category.name == 'Bar'" width="332px" height="235px" mat-card-image
+              src="https://st3.depositphotos.com/1915171/12590/v/950/depositphotos_125902006-stock-illustration-bar-or-pub-sign-icon.jpg"
+              alt="{{category.name}}">
+          <img *ngIf="category.name == 'Discoteca'" width="332px" height="235px" mat-card-image
+              src="https://st2.depositphotos.com/1020091/12486/v/950/depositphotos_124861478-stock-illustration-night-clubs-disco-sphere-icon.jpg"
+              alt="{{category.name}}">
+          <img *ngIf="category.name == 'Restaurante'" width="332px" height="235px" mat-card-image
+              src="https://www.clipartmax.com/png/small/229-2293689_restaurant-cutlery-symbol-in-a-square-comments-icono-restaurante-png.png"
+              alt="{{category.name}}">
+          <mat-card-actions class="centerIcons">
+              <button mat-button (click)="openDialogEditCategory(category)">
+                  <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-button (click)="openDialogDeleteCategory(category)">
+                  <mat-icon>delete_outline</mat-icon>
+              </button>
+          </mat-card-actions>
+      </mat-card>
+  </div>
+  <button (click)="openDialogAddCategory()" mat-fab color="warn" class="mat-fab-bottom-right" style="z-index: 9;">
+      <mat-icon class="mat-24">add</mat-icon>
+  </button>
+
+</div>

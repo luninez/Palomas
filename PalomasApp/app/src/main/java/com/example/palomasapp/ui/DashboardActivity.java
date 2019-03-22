@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.palomasapp.Dialog.fragment_dialog.LineaPedidoDelete;
 import com.example.palomasapp.Dialog.fragment_dialog.ProductoDelete;
@@ -102,11 +103,12 @@ public class DashboardActivity extends AppCompatActivity implements OnListProduc
 
                     return true;
                 case R.id.navigation_perfil:
-                    item.setIcon(R.drawable.ic_perfil_black_24dp);
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.containerFragmentMain, new Perfil(), "perfil")
-                            .commit();
+                    Toast.makeText(DashboardActivity.this, "NO ESTA IMPLEMENTADO", Toast.LENGTH_SHORT).show();
+//                    item.setIcon(R.drawable.ic_perfil_black_24dp);
+//                    getSupportFragmentManager()
+//                            .beginTransaction()
+//                            .replace(R.id.containerFragmentMain, new Perfil(), "perfil")
+//                            .commit();
 
                     fab.hide();
 

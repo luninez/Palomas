@@ -1,0 +1,47 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+ <p style="font-size: 20px; color: white">Cargando...</p>
+</ngx-spinner>
+<div class="session">
+  <div class="session-content">
+    <div class="session-wrapper">
+        <div class="text-xs-center pb-1">
+            <img width="45%" src="../../../assets/images/logo.png" alt=""/>
+        </div>
+      <mat-card>
+        <mat-card-content class="font-style">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="pb-1">
+              <h1>Iniciar sesión</h1>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="space-around">
+              <div class="pb-1">
+                <mat-form-field style="width: 100%" appearance="outline">
+                  <input matInput placeholder="Correo electrónico" [formControl]="form.controls['email']">
+                </mat-form-field>
+                <small *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="mat-text-warn"><i class="fas fa-exclamation-circle margin-right-2"></i>Introduzca una dirección de correo válida.</small>
+              </div>
+              <div class="pb-1">
+                <mat-form-field style="width: 100%" appearance="outline">
+                  <input matInput type="password" placeholder="Contraseña" [formControl]="form.controls['password']">
+                </mat-form-field>
+                <small *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched" class="mat-text-warn"><i class="fas fa-exclamation-circle margin-right-2"></i>Contraseña vacía</small>
+              </div>
+              <div class="pb-1">
+                <mat-checkbox class="font-style">Recordar</mat-checkbox>
+              </div>
+              <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid" (click)="onSubmit()">Iniciar sesión</button>
+            </div>
+            <div class="pt-1 pb-1 text-xs-center">
+              <a [routerLink]="['forgot']">¿Olvidaste tu contraseña?</a>&nbsp;&nbsp;&nbsp;&nbsp;
+              <a [routerLink]="['signup']" class="text-bold">Crear cuenta</a>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

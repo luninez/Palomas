@@ -14,7 +14,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.palomasapp.Dialog.ViewModel.ProductoEditViewModel;
 import com.example.palomasapp.Funcionalidades.ServiceGenerator;
 import com.example.palomasapp.Funcionalidades.Services.UserService;
 import com.example.palomasapp.Funcionalidades.Util;
@@ -25,12 +28,39 @@ import com.example.palomasapp.R;
 import retrofit2.Call;
 
 public class Perfil extends Fragment {
+
+    private static final String ARG_ID = "id";
+    private static final String ARG_NOMBRE = "nombre";
+    private static final String ARG_EMAIL = "email";
+    private static final String ARG_PASSWPRD = "password";
     private ProfileViewModel mViewModel;
     private ImageView perfil_imagen;
     private EditText name, email;
+    private TextView editar, eliminar;
     private Button editPerfil;
+    private String argId, argNombre, argEmail;
 
     public static Perfil newInstance() { return new Perfil(); }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if(getArguments() != null) {
+            argNombre = getArguments().getString(ARG_NOMBRE);
+            argNombre = getArguments().getString(ARG_NOMBRE);
+            argEmail = getArguments().getString(ARG_EMAIL);
+
+            argId = getArguments().getString(ARG_ID);
+
+        }
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -41,26 +71,22 @@ public class Perfil extends Fragment {
         name = v.findViewById(R.id.perfil_name);
         email = v.findViewById(R.id.perfil_name3);
 
+        editar = v.findViewById(R.id.perfil_cerrar_sesion);
+        eliminar = v.findViewById(R.id.perfil_eliminar_sesion);
+
         editPerfil = v.findViewById(R.id.perfil_btn_editar);
 
         // Eventos
         editPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              UserService service = ServiceGenerator.createService(UserService.class);
-              Call<User> call = service.getOneUser(Util.getUserId(getContext()));
+                Toast.makeText(getContext(), "En construccion", Toast.LENGTH_SHORT).show();
             }
         });
 
 
         return v;
 
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
     }
 
 }

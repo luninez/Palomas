@@ -122,7 +122,7 @@ public class GestoraPedido {
                     //Pintar
 
                 }else{
-                    Toast.makeText(ctx, "No se pudo añadir al carrito.", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(ctx, "No se pudo añadir al carrito.", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -144,7 +144,7 @@ public class GestoraPedido {
                     //Pintar
 
                 }else{
-                    Toast.makeText(ctx, "No se pudo añadir al carrito.", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(ctx, "No se pudo añadir al carrito.", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -207,10 +207,10 @@ public class GestoraPedido {
             @Override
             public void onResponse(Call<ResponseContainer<LineaPedido>> call, Response<ResponseContainer<LineaPedido>> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(ctx, "Tienes elementos en el carrito.", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(ctx, "Tienes elementos en el carrito.", Toast.LENGTH_SHORT).show();
                     lineaPedidos = response.body().getRows();
                 }else{
-                    Toast.makeText(ctx, "No se pudo borrar", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(ctx, "", Toast.LENGTH_SHORT).show();
                 }
             }
 
